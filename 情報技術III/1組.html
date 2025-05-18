@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>情報技術III 1組 - パスワード認証</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h1 { text-align: center; }
+    #content { display: none; margin-top: 20px; }
+    .hidden { display: none; }
+    input[type="password"] { width: 100%; padding: 10px; }
+    button { margin-top: 10px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h1>情報技術III 1組</h1>
+  <p>このページは1組専用です。合言葉を入力してください。</p>
+  <input type="password" id="password" placeholder="パスワードを入力" />
+  <button onclick="checkPassword()">送信</button>
+  <div id="content">
+    <h2>確認テスト</h2>
+    <ul>
+      <li><a href="#" target="_blank">第1回テスト（Google Forms）</a></li>
+      <li><a href="#" target="_blank">第2回テスト（Google Forms）</a></li>
+    </ul>
+  </div>
+  <p id="error" class="hidden" style="color:red;">パスワードが間違っています。</p>
+  <script>
+    const CORRECT_PASSWORD = "iii1pass";
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === CORRECT_PASSWORD) {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("error").classList.add("hidden");
+      } else {
+        document.getElementById("content").style.display = "none";
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>
