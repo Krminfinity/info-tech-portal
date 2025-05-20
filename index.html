@@ -17,6 +17,13 @@
       font-size: 1.2em;
     }
   </style>
+  <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#0d6efd" />
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+  }
+</script>
 </head>
 <body>
   <h1>情報技術講義ポータル</h1>
