@@ -17,9 +17,8 @@ Each course directory contains HTML files for different groups (e.g., `情報技
 
 ## Password Protection
 
-The group-specific pages (e.g., `情報技術II/1組.html`) are password protected. The passwords are currently hardcoded directly in the HTML files. For example, the password for `情報技術II/1組.html` is `ii1passZk`.
+The group-specific pages (e.g., `情報技術II/1組.html`) are password protected. 
 
-**Note:** This is a basic form of protection. For more sensitive information or a larger user base, a more robust authentication system would be recommended.
 
 ## Progressive Web App (PWA) Features
 
