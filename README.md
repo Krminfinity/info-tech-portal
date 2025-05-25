@@ -4,8 +4,8 @@ This project is a simple web portal for students to access lecture materials and
 
 ## Page URL
 
-You can access the portal here: [YOUR_PAGE_URL_HERE] 
-(Please replace `[YOUR_PAGE_URL_HERE]` with the actual URL where the portal is deployed.)
+You can access the portal here: [https://krminfinity.github.io/info-tech-portal/] 
+
 
 ## Project Structure
 
