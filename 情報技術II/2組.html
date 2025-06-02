@@ -24,8 +24,10 @@
 <body>
   <h1>情報技術II 2組</h1>
   <p>このページは2組専用です。合言葉を入力してください。</p>
-  <input type="password" id="password" placeholder="パスワードを入力" />
-  <button onclick="checkPassword()">送信</button>
+  <form onsubmit="checkPassword(); return false;">
+  <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="パスワードを入力" />
+  <button type="submit">送信</button>
+</form>
   <div id="content">
     <h2>確認テスト</h2>
     <ul>
