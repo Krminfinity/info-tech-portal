@@ -52,7 +52,7 @@
         <li><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="btn btn-custom d-block mb-2">第9回テスト（Google Forms）</a></li>
       </ul>
     </div>
-    <p id="error" class="hidden" style="color:red;">パスワードが間違っています。</p>
+    <p id="error" class="d-none" style="color:red;">パスワードが間違っています。</p>
   </div>
 
   <div class="footer">
@@ -64,10 +64,10 @@
       const input = document.getElementById("password").value;
       if (input === CORRECT_PASSWORD) {
         document.getElementById("content").style.display = "block";
-        document.getElementById("error").classList.add("hidden");
+        document.getElementById("error").classList.add("d-none");
       } else {
         document.getElementById("content").style.display = "none";
-        document.getElementById("error").classList.remove("hidden");
+        document.getElementById("error").classList.remove("d-none");
       }
     }
   </script>
