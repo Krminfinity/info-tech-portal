@@ -54,7 +54,7 @@
       <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
     </ul> -->
     </div>
-    <p id="error" class="hidden" style="color:red;">パスワードが間違っています。</p>
+    <p id="error" class="d-none" style="color:red;">パスワードが間違っています。</p>
   </div>
 
   <div class="footer">
@@ -66,10 +66,10 @@
       const input = document.getElementById("password").value;
       if (input === CORRECT_PASSWORD) {
         document.getElementById("content").style.display = "block";
-        document.getElementById("error").classList.add("hidden");
+        document.getElementById("error").classList.add("d-none");
       } else {
         document.getElementById("content").style.display = "none";
-        document.getElementById("error").classList.remove("hidden");
+        document.getElementById("error").classList.remove("d-none");
       }
     }
   </script>
