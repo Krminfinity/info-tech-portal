@@ -20,23 +20,34 @@ h1 {
   text-align: center;
 }
 
+/* Remove list styles from ULs used as button containers */
+/* Apply class 'button-list' to relevant <ul> elements in HTML */
+.button-list li {
+  list-style-type: none;
+}
+.button-list {
+  padding-left: 0; /* Remove default ul padding */
+}
+
 .btn-custom {
   background-color: #007bff;
   border-color: #007bff;
   color: white;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem; /* Original padding */
+  font-size: 1.1rem;      /* Original font size */
   border-radius: 0.3rem;
   text-decoration: none;
-  display: inline-block;
+  display: inline-block; /* Can be overridden by d-block in HTML for full width */
   margin: 0.5rem 0;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
 }
 
 .btn-custom:hover {
   background-color: #0056b3;
   border-color: #0056b3;
   color: white;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Slightly larger shadow on hover */
 }
 
 .header {
@@ -75,4 +86,19 @@ section h2 {
   text-align: center;
   margin-bottom: 1.5rem;
   color: #007bff;
+}
+
+@media (max-width: 767.98px) {
+  /* Increase padding and font size for custom buttons on mobile */
+  .btn-custom.d-block { /* Targets block-level custom buttons, common in lists */
+    padding: 0.85rem 1.2rem; /* Increased padding */
+    font-size: 1.15rem;   /* Slightly larger font */
+  }
+
+  /* Specifically target submit buttons on password forms if they are .btn-primary */
+  /* Assuming password forms are unique enough or we can add a class to them if needed */
+  form button[type="submit"].btn.btn-primary {
+    padding: 0.75rem 1rem; /* Ensure comfortable tap size */
+    font-size: 1.1rem;
+  }
 }

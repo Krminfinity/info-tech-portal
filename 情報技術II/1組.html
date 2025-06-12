@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>情報技術II 1組 - パスワード認証</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h1 { text-align: center; }
+    #content { display: none; margin-top: 20px; }
+    .hidden { display: none; }
+    input[type="password"] { width: 100%; padding: 10px; }
+    button { margin-top: 10px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h1>情報技術II 1組</h1>
+  <p>このページは1組専用です。合言葉を入力してください。</p>
+  <form onsubmit="checkPassword(); return false;">
+  <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="パスワードを入力" />
+  <button type="submit">送信</button>
+  </form>
+  <div id="content">
+    <h2>確認テスト</h2>
+    <ul>
+      <li><a href="#" target="_blank">第1回テスト（Google Forms）</a></li>
+      <li><a href="#" target="_blank">第2回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/pCbrnq4Jqjt7wFhw6" target="_blank">第3回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/DzbkhSoMCmPDhyT86" target="_blank">第4回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/r6cq7jcb32Z4Mm217" target="_blank">第5回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/x2d9HEgX9KbgX7Uf9" target="_blank">第6回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/5ZZCzX8sSkv83jBeA" target="_blank">第7回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank">第8回テスト（Google Forms）</a></li>
+      <li><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank">第9回テスト（Google Forms）</a></li>
+    </ul>
+  </div>
+  <p id="error" class="hidden" style="color:red;">パスワードが間違っています。</p>
+  <script>
+    const CORRECT_PASSWORD = "ii1passZk";
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === CORRECT_PASSWORD) {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("error").classList.add("hidden");
+      } else {
+        document.getElementById("content").style.display = "none";
+        document.getElementById("error").classList.remove("hidden");
+      }
+    }
+  </script>
+</body>
+</html>
