@@ -10,67 +10,135 @@
   <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/info-tech-portal/index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
-          </li>
+  <div class="pc-view d-none d-lg-block">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavPcIt3Cl2" aria-controls="navbarNavPcIt3Cl2" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavPcIt3Cl2">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h1 class="my-4">情報技術III 2組</h1>
+      <p class="mb-3">このページは2組専用です。合言葉を入力してください。</p>
+      <form onsubmit="checkPasswordPcIt3Cl2(); return false;" class="mb-4">
+        <input type="password" id="passwordPcIt3Cl2" name="password" autocomplete="current-password" required placeholder="パスワードを入力" class="form-control mb-2" />
+        <button type="submit" class="btn btn-primary">送信</button>
+      </form>
+      <div id="contentPcIt3Cl2" style="display: none; margin-top: 20px;">
+        <h2>確認テスト</h2>
+        確認テストは、スマホで回答してください。スマホの設定言語で問題が表示されるので、日本語が得意でない人は、スマホの設定を英語や自分の国の言葉にしてください。
+        <ul class="button-list">
+          <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
+          <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/Po9w1fwC4NJLDBND9" target="_blank" class="btn btn-custom d-block mb-2">第3回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/muAqBzFxmVRQJn2Z7" target="_blank" class="btn btn-custom d-block mb-2">第4回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/JaRVecdRmkY2gP527" target="_blank" class="btn btn-custom d-block mb-2">第5回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/3sjbATfqm4oGRhiY7" target="_blank" class="btn btn-custom d-block mb-2">第6回テスト（Google Forms）</a></li>
         </ul>
+        <h2>関連コード</h2>
+        <!--     <ul>
+          <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
+        </ul> -->
+      </div>
+      <p id="errorPcIt3Cl2" class="d-none" style="color:red;">パスワードが間違っています。</p>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 講義ポータル. All rights reserved.</p>
+    </div>
+  </div>
+
+  <div class="mobile-view d-lg-none">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileIt3Cl2" aria-controls="navbarNavMobileIt3Cl2" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavMobileIt3Cl2">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div style="padding-top: 70px;">
+      <div class="container mt-3">
+        <h1 class="my-4">情報技術III 2組</h1>
+        <p class="mb-3">このページは2組専用です。合言葉を入力してください。</p>
+        <form onsubmit="checkPasswordMobileIt3Cl2(); return false;" class="mb-4">
+          <input type="password" id="passwordMobileIt3Cl2" name="password" autocomplete="current-password" required placeholder="パスワードを入力" class="form-control mb-2" />
+          <button type="submit" class="btn btn-primary">送信</button>
+        </form>
+        <div id="contentMobileIt3Cl2" style="display: none; margin-top: 20px;">
+          <h2>確認テスト</h2>
+          確認テストは、スマホで回答してください。スマホの設定言語で問題が表示されるので、日本語が得意でない人は、スマホの設定を英語や自分の国の言葉にしてください。
+          <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第1回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第2回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/Po9w1fwC4NJLDBND9" target="_blank" class="stretched-link">第3回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/muAqBzFxmVRQJn2Z7" target="_blank" class="stretched-link">第4回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/JaRVecdRmkY2gP527" target="_blank" class="stretched-link">第5回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/3sjbATfqm4oGRhiY7" target="_blank" class="stretched-link">第6回テスト（Google Forms）</a></div></div>
+          <h2>関連コード</h2>
+          <!--     <ul>
+            <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
+          </ul> -->
+        </div>
+        <p id="errorMobileIt3Cl2" class="d-none" style="color:red;">パスワードが間違っています。</p>
+      </div>
+
+      <div class="footer mt-4">
+        <p>&copy; 2024 講義ポータル. All rights reserved.</p>
       </div>
     </div>
-  </nav>
-
-  <div class="container mt-5">
-    <h1 class="my-4">情報技術III 2組</h1>
-    <p class="mb-3">このページは2組専用です。合言葉を入力してください。</p>
-    <form onsubmit="checkPassword(); return false;" class="mb-4">
-      <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="パスワードを入力" class="form-control mb-2" />
-      <button type="submit" class="btn btn-primary">送信</button>
-    </form>
-    <div id="content" style="display: none; margin-top: 20px;">
-      <h2>確認テスト</h2>
-      確認テストは、スマホで回答してください。スマホの設定言語で問題が表示されるので、日本語が得意でない人は、スマホの設定を英語や自分の国の言葉にしてください。
-      <ul class="button-list">
-        <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
-        <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/Po9w1fwC4NJLDBND9" target="_blank" class="btn btn-custom d-block mb-2">第3回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/muAqBzFxmVRQJn2Z7" target="_blank" class="btn btn-custom d-block mb-2">第4回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/JaRVecdRmkY2gP527" target="_blank" class="btn btn-custom d-block mb-2">第5回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/3sjbATfqm4oGRhiY7" target="_blank" class="btn btn-custom d-block mb-2">第6回テスト（Google Forms）</a></li>
-      </ul>
-      <h2>関連コード</h2>
-<!--     <ul>
-      <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
-    </ul> -->
-    </div>
-    <p id="error" class="d-none" style="color:red;">パスワードが間違っています。</p>
   </div>
 
-  <div class="footer">
-    <p>&copy; 2024 講義ポータル. All rights reserved.</p>
-  </div>
   <script>
-    const CORRECT_PASSWORD = "iii2passYg";
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      if (input === CORRECT_PASSWORD) {
-        document.getElementById("content").style.display = "block";
-        document.getElementById("error").classList.add("d-none");
+    function checkPasswordPcIt3Cl2() {
+      const pw = "iii2passYg";
+      const input = document.getElementById("passwordPcIt3Cl2").value;
+      if (input === pw) {
+        document.getElementById("contentPcIt3Cl2").style.display = "block";
+        document.getElementById("errorPcIt3Cl2").classList.add("d-none");
       } else {
-        document.getElementById("content").style.display = "none";
-        document.getElementById("error").classList.remove("d-none");
+        document.getElementById("contentPcIt3Cl2").style.display = "none";
+        document.getElementById("errorPcIt3Cl2").classList.remove("d-none");
+      }
+    }
+    function checkPasswordMobileIt3Cl2() {
+      const pw = "iii2passYg";
+      const input = document.getElementById("passwordMobileIt3Cl2").value;
+      if (input === pw) {
+        document.getElementById("contentMobileIt3Cl2").style.display = "block";
+        document.getElementById("errorMobileIt3Cl2").classList.add("d-none");
+      } else {
+        document.getElementById("contentMobileIt3Cl2").style.display = "none";
+        document.getElementById("errorMobileIt3Cl2").classList.remove("d-none");
       }
     }
   </script>
