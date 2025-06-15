@@ -102,3 +102,21 @@ section h2 {
     font-size: 1.1rem;
   }
 }
+
+/* Styling for cards used in mobile view lists */
+.mobile-view .card {
+  margin-bottom: 0.75rem; /* Add some space between stacked cards */
+}
+
+.mobile-view .card .card-body {
+  padding: 0.85rem 1.2rem; /* Match .btn-custom.d-block on mobile */
+}
+
+.mobile-view .card .card-body a.stretched-link {
+  text-decoration: none; /* Ensure links in cards are not underlined by default */
+  color: inherit; /* Inherit color from card body, or set specifically */
+}
+
+.mobile-view .card .card-body a.stretched-link:hover {
+  color: #0056b3; /* Example hover color, match btn-custom hover */
+}

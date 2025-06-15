@@ -10,65 +10,169 @@
   <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/info-tech-portal/index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
-          </li>
+  <div class="pc-view d-none d-lg-block">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavPcIt2Cl1" aria-controls="navbarNavPcIt2Cl1" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavPcIt2Cl1">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h1 class="my-4">情報技術II 1組</h1>
+      <p class="mb-3">このページは1組専用です。合言葉を入力してください。</p>
+      <form onsubmit="checkPassword(); return false;" class="mb-4">
+        <input type="password" id="passwordPc" name="password" autocomplete="current-password" required placeholder="パスワードを入力" class="form-control mb-2" />
+        <button type="submit" class="btn btn-primary">送信</button>
+      </form>
+      <div id="contentPc" style="display: none; margin-top: 20px;">
+        <h2>確認テスト</h2>
+        <ul class="button-list">
+          <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
+          <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/pCbrnq4Jqjt7wFhw6" target="_blank" class="btn btn-custom d-block mb-2">第3回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/DzbkhSoMCmPDhyT86" target="_blank" class="btn btn-custom d-block mb-2">第4回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/r6cq7jcb32Z4Mm217" target="_blank" class="btn btn-custom d-block mb-2">第5回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/x2d9HEgX9KbgX7Uf9" target="_blank" class="btn btn-custom d-block mb-2">第6回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/5ZZCzX8sSkv83jBeA" target="_blank" class="btn btn-custom d-block mb-2">第7回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="btn btn-custom d-block mb-2">第8回テスト（Google Forms）</a></li>
+          <li><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="btn btn-custom d-block mb-2">第9回テスト（Google Forms）</a></li>
         </ul>
       </div>
+      <p id="errorPc" class="d-none" style="color:red;">パスワードが間違っています。</p>
     </div>
-  </nav>
 
-  <div class="container mt-5">
-    <h1 class="my-4">情報技術II 1組</h1>
-    <p class="mb-3">このページは1組専用です。合言葉を入力してください。</p>
-    <form onsubmit="checkPassword(); return false;" class="mb-4">
-      <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="パスワードを入力" class="form-control mb-2" />
-      <button type="submit" class="btn btn-primary">送信</button>
-    </form>
-    <div id="content" style="display: none; margin-top: 20px;">
-      <h2>確認テスト</h2>
-      <ul class="button-list">
-        <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
-        <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/pCbrnq4Jqjt7wFhw6" target="_blank" class="btn btn-custom d-block mb-2">第3回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/DzbkhSoMCmPDhyT86" target="_blank" class="btn btn-custom d-block mb-2">第4回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/r6cq7jcb32Z4Mm217" target="_blank" class="btn btn-custom d-block mb-2">第5回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/x2d9HEgX9KbgX7Uf9" target="_blank" class="btn btn-custom d-block mb-2">第6回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/5ZZCzX8sSkv83jBeA" target="_blank" class="btn btn-custom d-block mb-2">第7回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="btn btn-custom d-block mb-2">第8回テスト（Google Forms）</a></li>
-        <li><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="btn btn-custom d-block mb-2">第9回テスト（Google Forms）</a></li>
-      </ul>
+    <div class="footer">
+      <p>&copy; 2024 講義ポータル. All rights reserved.</p>
     </div>
-    <p id="error" class="d-none" style="color:red;">パスワードが間違っています。</p>
   </div>
 
-  <div class="footer">
-    <p>&copy; 2024 講義ポータル. All rights reserved.</p>
+  <div class="mobile-view d-lg-none">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobileIt2Cl1" aria-controls="navbarNavMobileIt2Cl1" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavMobileIt2Cl1">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div style="padding-top: 70px;">
+      <div class="container mt-3"> <!-- Reduced top margin for container as padding-top exists on wrapper -->
+        <h1 class="my-4">情報技術II 1組</h1>
+        <p class="mb-3">このページは1組専用です。合言葉を入力してください。</p>
+        <form onsubmit="checkPasswordMobile(); return false;" class="mb-4">
+          <input type="password" id="passwordMobile" name="password" autocomplete="current-password" required placeholder="パスワードを入力" class="form-control mb-2" />
+          <button type="submit" class="btn btn-primary">送信</button>
+        </form>
+        <div id="contentMobile" style="display: none; margin-top: 20px;">
+          <h2>確認テスト</h2>
+          <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第1回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第2回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/pCbrnq4Jqjt7wFhw6" target="_blank" class="stretched-link">第3回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/DzbkhSoMCmPDhyT86" target="_blank" class="stretched-link">第4回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/r6cq7jcb32Z4Mm217" target="_blank" class="stretched-link">第5回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/x2d9HEgX9KbgX7Uf9" target="_blank" class="stretched-link">第6回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/5ZZCzX8sSkv83jBeA" target="_blank" class="stretched-link">第7回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="stretched-link">第8回テスト（Google Forms）</a></div></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="stretched-link">第9回テスト（Google Forms）</a></div></div>
+        </div>
+        <p id="errorMobile" class="d-none" style="color:red;">パスワードが間違っています。</p>
+      </div>
+
+      <div class="footer mt-4">
+        <p>&copy; 2024 講義ポータル. All rights reserved.</p>
+      </div>
+    </div>
   </div>
+
   <script>
-    const CORRECT_PASSWORD = "ii1passZk";
-    function checkPassword() {
-      const input = document.getElementById("password").value;
-      if (input === CORRECT_PASSWORD) {
-        document.getElementById("content").style.display = "block";
-        document.getElementById("error").classList.add("d-none");
+    const CORRECT_PASSWORD_IT2_CL1 = "ii1passZk"; // Unique constant name
+    function checkPassword() { // For PC view
+      const input = document.getElementById("passwordPc").value;
+      if (input === CORRECT_PASSWORD_IT2_CL1) {
+        document.getElementById("contentPc").style.display = "block";
+        document.getElementById("errorPc").classList.add("d-none");
       } else {
-        document.getElementById("content").style.display = "none";
-        document.getElementById("error").classList.remove("d-none");
+        document.getElementById("contentPc").style.display = "none";
+        document.getElementById("errorPc").classList.remove("d-none");
+      }
+    }
+    function checkPasswordMobile() { // For Mobile view
+      const input = document.getElementById("passwordMobile").value;
+      if (input === CORRECT_PASSWORD_IT2_CL1) {
+        document.getElementById("contentMobile").style.display = "block";
+        document.getElementById("errorMobile").classList.add("d-none");
+      } else {
+        document.getElementById("contentMobile").style.display = "none";
+        document.getElementById("errorMobile").classList.remove("d-none");
+      }
+    }
+    // Consolidate if possible, or ensure forms call the right function.
+    // The PC form needs to call checkPassword() and mobile form checkPasswordMobile().
+    // For this structure, I'll update the PC form's onsubmit to call checkPassword()
+    // and ensure ids are unique (passwordPc, contentPc, errorPc).
+    // And mobile form onsubmit calls checkPasswordMobile() (passwordMobile, contentMobile, errorMobile).
+    // The original script was simple. I'll adapt it to work with unique IDs for PC and Mobile.
+    // Corrected in the forms above: passwordPc/contentPc/errorPc and passwordMobile/contentMobile/errorMobile
+    // The script below is a combined approach, but the forms above now call specific functions.
+    // The original script was singular; I need to make sure IDs are unique if I want two forms in the DOM.
+    // The provided HTML structure uses unique IDs (e.g. passwordPc, passwordMobile).
+    // I will update the script to reflect this, ensuring each form calls its respective function.
+    // The script logic for checkPassword and checkPasswordMobile should be distinct.
+    // The script tag below should contain *both* functions if they are called from different forms.
+  </script>
+  <script> // Script for PC view form
+    function checkPassword() {
+      const pw = "ii1passZk"; // Keep original password logic separate
+      const input = document.getElementById("passwordPc").value;
+      if (input === pw) {
+        document.getElementById("contentPc").style.display = "block";
+        document.getElementById("errorPc").classList.add("d-none");
+      } else {
+        document.getElementById("contentPc").style.display = "none";
+        document.getElementById("errorPc").classList.remove("d-none");
+      }
+    }
+  </script>
+  <script> // Script for Mobile view form
+    function checkPasswordMobile() {
+      const pw = "ii1passZk"; // Keep original password logic separate
+      const input = document.getElementById("passwordMobile").value;
+      if (input === pw) {
+        document.getElementById("contentMobile").style.display = "block";
+        document.getElementById("errorMobile").classList.add("d-none");
+      } else {
+        document.getElementById("contentMobile").style.display = "none";
+        document.getElementById("errorMobile").classList.remove("d-none");
       }
     }
   </script>
