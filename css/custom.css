@@ -1,122 +1,353 @@
+/* CSS Custom Properties for consistent theming */
+:root {
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #8b5cf6;
+  --secondary-color: #06b6d4;
+  --accent-color: #f59e0b;
+  --success-color: #10b981;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --border-radius: 0.75rem;
+  --border-radius-lg: 1rem;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f8f9fa;
-  color: #343a40;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
 }
 
 .container {
   max-width: 800px;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin: 2rem auto;
   padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 h1 {
-  color: #007bff;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 2rem;
   text-align: center;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
 }
 
-/* Remove list styles from ULs used as button containers */
-/* Apply class 'button-list' to relevant <ul> elements in HTML */
-.button-list li {
-  list-style-type: none;
-}
-.button-list {
-  padding-left: 0; /* Remove default ul padding */
+h2 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  position: relative;
 }
 
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  border-radius: 2px;
+}
+
+/* Button styles */
 .btn-custom {
-  background-color: #007bff;
-  border-color: #007bff;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  border: none;
   color: white;
-  padding: 0.75rem 1.5rem; /* Original padding */
-  font-size: 1.1rem;      /* Original font size */
-  border-radius: 0.3rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
   text-decoration: none;
-  display: inline-block; /* Can be overridden by d-block in HTML for full width */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin: 0.5rem 0;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-custom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
 .btn-custom:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
   color: white;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Slightly larger shadow on hover */
+  text-decoration: none;
 }
 
-.header {
-  background-color: #343a40;
-  color: white;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
-  text-align: center;
+.btn-custom:hover::before {
+  left: 100%;
 }
 
-.header h1 {
-  color: white;
-  margin-bottom: 0;
+.btn-custom:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
 }
 
+.btn-custom i {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Card components */
+.course-card, .question-card {
+  background: var(--surface-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+}
+
+.course-card:hover, .question-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.question-card::before {
+  background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+}
+
+/* Navigation styles */
+.navbar {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95)) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: white !important;
+}
+
+/* Footer styles */
 .footer {
-  background-color: #343a40;
-  color: white;
-  padding: 1rem 0;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(51, 65, 85, 0.95));
+  color: rgba(255, 255, 255, 0.8);
+  padding: 2rem 0;
   margin-top: 3rem;
   text-align: center;
   font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer p {
   margin-bottom: 0;
 }
 
+/* Section styles */
 section {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eeeeee;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 section h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #007bff;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
 }
 
+/* Lead text styling */
+.lead {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Mobile responsive improvements */
 @media (max-width: 767.98px) {
-  /* Increase padding and font size for custom buttons on mobile */
-  .btn-custom.d-block { /* Targets block-level custom buttons, common in lists */
-    padding: 0.85rem 1.2rem; /* Increased padding */
-    font-size: 1.15rem;   /* Slightly larger font */
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: scroll;
   }
 
-  /* Specifically target submit buttons on password forms if they are .btn-primary */
-  /* Assuming password forms are unique enough or we can add a class to them if needed */
-  form button[type="submit"].btn.btn-primary {
-    padding: 0.75rem 1rem; /* Ensure comfortable tap size */
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .btn-custom {
+    padding: 1.25rem 2rem;
+    font-size: 1.2rem;
+    width: 100%;
+    margin: 0.75rem 0;
+  }
+
+  section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
+
+  .lead {
     font-size: 1.1rem;
   }
 }
 
-/* Styling for cards used in mobile view lists */
+/* Mobile view card improvements */
 .mobile-view .card {
-  margin-bottom: 0.75rem; /* Add some space between stacked cards */
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  background: var(--surface-color);
+}
+
+.mobile-view .card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .mobile-view .card .card-body {
-  padding: 0.85rem 1.2rem; /* Match .btn-custom.d-block on mobile */
+  padding: 1.5rem;
 }
 
 .mobile-view .card .card-body a.stretched-link {
-  text-decoration: none; /* Ensure links in cards are not underlined by default */
-  color: inherit; /* Inherit color from card body, or set specifically */
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .mobile-view .card .card-body a.stretched-link:hover {
-  color: #0056b3; /* Example hover color, match btn-custom hover */
+  color: var(--primary-color);
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Accessibility improvements */
+.btn-custom:focus,
+.nav-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Remove list styles from button containers */
+.button-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.button-list li {
+  list-style-type: none;
 }
