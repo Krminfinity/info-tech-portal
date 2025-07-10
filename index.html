@@ -23,6 +23,7 @@
     };
   </script>
   <script src="https://rubyfuljs.s3.ap-northeast-1.amazonaws.com/rubyful.js" async></script>
+  <script src="js/portal-data.js"></script>
 </head>
 <body>
   <div class="pc-view d-none d-lg-block">
@@ -33,16 +34,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavPcRoot">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/info-tech-portal/index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
-            </li>
+          <ul class="navbar-nav" id="pcNavigation">
+            <!-- ナビゲーションは動的に生成されます -->
           </ul>
         </div>
       </div>
@@ -52,32 +45,8 @@
       <h1><i class="fas fa-graduation-cap me-3"></i>講義ポータル</h1>
       <p class="lead">受講している科目を選んでください</p>
       
-      <div class="row g-4">
-        <div class="col-md-6">
-          <div class="course-card">
-            <div class="text-center">
-              <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
-              <h3>情報技術Ⅱ</h3>
-              <p class="text-muted mb-3">プログラミング基礎とアルゴリズム</p>
-              <a href="/info-tech-portal/information_technology_2/index.html" class="btn btn-custom w-100">
-                <i class="fas fa-arrow-right me-2"></i>講義に参加
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <div class="course-card">
-            <div class="text-center">
-              <i class="fas fa-database fa-3x text-primary mb-3"></i>
-              <h3>情報技術Ⅲ</h3>
-              <p class="text-muted mb-3">データベースとWebアプリケーション</p>
-              <a href="/info-tech-portal/information_technology_3/index.html" class="btn btn-custom w-100">
-                <i class="fas fa-arrow-right me-2"></i>講義に参加
-              </a>
-            </div>
-          </div>
-        </div>
+      <div class="row g-4" id="pcCourses">
+        <!-- 講義カードは動的に生成されます -->
       </div>
 
       <section>
@@ -109,16 +78,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavMobileRoot">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/info-tech-portal/index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/info-tech-portal/information_technology_2/index.html">情報技術II</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/info-tech-portal/information_technology_3/index.html">情報技術III</a>
-            </li>
+          <ul class="navbar-nav" id="mobileNavigation">
+            <!-- ナビゲーションは動的に生成されます -->
           </ul>
         </div>
       </div>
@@ -129,28 +90,8 @@
         <h1><i class="fas fa-graduation-cap me-3"></i>講義ポータル</h1>
         <p class="lead">受講している科目を選んでください</p>
         
-        <div class="d-grid gap-3">
-          <div class="course-card">
-            <div class="text-center">
-              <i class="fas fa-laptop-code fa-2x text-primary mb-3"></i>
-              <h4>情報技術Ⅱ</h4>
-              <p class="text-muted mb-3">プログラミング基礎とアルゴリズム</p>
-              <a href="/info-tech-portal/information_technology_2/index.html" class="btn btn-custom w-100">
-                <i class="fas fa-arrow-right me-2"></i>講義に参加
-              </a>
-            </div>
-          </div>
-          
-          <div class="course-card">
-            <div class="text-center">
-              <i class="fas fa-database fa-2x text-primary mb-3"></i>
-              <h4>情報技術Ⅲ</h4>
-              <p class="text-muted mb-3">データベースとWebアプリケーション</p>
-              <a href="/info-tech-portal/information_technology_3/index.html" class="btn btn-custom w-100">
-                <i class="fas fa-arrow-right me-2"></i>講義に参加
-              </a>
-            </div>
-          </div>
+        <div class="d-grid gap-3" id="mobileCourses">
+          <!-- 講義カードは動的に生成されます -->
         </div>
 
         <section>
@@ -176,5 +117,20 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+  <script>
+    // ページ読み込み時に動的コンテンツを生成
+    document.addEventListener('DOMContentLoaded', function() {
+      // ナビゲーション生成
+      const navHTML = portalData.generateNavigationHTML('home');
+      document.getElementById('pcNavigation').innerHTML = navHTML;
+      document.getElementById('mobileNavigation').innerHTML = navHTML;
+      
+      // 講義カード生成
+      const coursesHTML = portalData.generateCoursesHTML();
+      document.getElementById('pcCourses').innerHTML = coursesHTML.pcHTML;
+      document.getElementById('mobileCourses').innerHTML = coursesHTML.mobileHTML;
+    });
+  </script>
 </body>
 </html>

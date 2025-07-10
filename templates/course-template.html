@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>講義ページ - 講義ポータル</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/custom.css">
+  
+  <script>
+    // Rubyful.jsの設定（デフォルトでルビ表示OFF）
+    window.RubyfulJsApp = {
+      defaultDisplay: false
+    };
+  </script>
+  <script src="https://rubyfuljs.s3.ap-northeast-1.amazonaws.com/rubyful.js" async></script>
+  <script src="../js/portal-data.js"></script>
+</head>
+<body>
+  <div class="pc-view d-none d-lg-block">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavPc" aria-controls="navbarNavPc" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavPc">
+          <ul class="navbar-nav" id="pcNavigation">
+            <!-- ナビゲーションは動的に生成されます -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1 id="courseTitle"><i class="fas fa-book me-3"></i>講義ページ</h1>
+      <p class="lead" id="courseDescription">講義の説明</p>
+      
+      <div id="courseContent">
+        <!-- コンテンツは動的に生成されます -->
+      </div>
+
+      <!-- 質問フォームセクション -->
+      <section>
+        <div class="question-card">
+          <div class="text-center">
+            <i class="fas fa-question-circle fa-3x text-info mb-3"></i>
+            <h2>質問はこちらから</h2>
+            <p class="text-muted">授業についての質問がある人は、以下のフォームから匿名で送信できます。</p>
+            <a href="https://forms.gle/pf2y9UDUHNbYzj7r9" target="_blank" rel="noopener noreferrer" class="btn btn-custom">
+              <i class="fas fa-external-link-alt me-2"></i>質問フォームを開く
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <p>&copy; 2025 講義ポータル. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-view d-lg-none">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/info-tech-portal/index.html">講義ポータル</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavMobile" aria-controls="navbarNavMobile" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavMobile">
+          <ul class="navbar-nav" id="mobileNavigation">
+            <!-- ナビゲーションは動的に生成されます -->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div style="padding-top: 70px;">
+      <div class="container">
+        <h1 id="mobileCourseTitle"><i class="fas fa-book me-3"></i>講義ページ</h1>
+        <p class="lead" id="mobileCourseDescription">講義の説明</p>
+        
+        <div id="mobileCourseContent">
+          <!-- コンテンツは動的に生成されます -->
+        </div>
+
+        <!-- 質問フォームセクション -->
+        <section>
+          <div class="question-card">
+            <div class="text-center">
+              <i class="fas fa-question-circle fa-2x text-info mb-3"></i>
+              <h2>質問はこちらから</h2>
+              <p class="text-muted">授業についての質問がある人は、以下のフォームから匿名で送信できます。</p>
+              <a href="https://forms.gle/pf2y9UDUHNbYzj7r9" target="_blank" rel="noopener noreferrer" class="btn btn-custom w-100">
+                <i class="fas fa-external-link-alt me-2"></i>質問フォームを開く
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer mt-4">
+        <div class="container">
+          <p>&copy; 2025 講義ポータル. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+  <script>
+    // ページ読み込み時に動的コンテンツを生成
+    document.addEventListener('DOMContentLoaded', async function() {
+      try {
+        // 現在のフォルダ名を取得
+        const pathSegments = window.location.pathname.split('/');
+        const folderName = pathSegments[pathSegments.length - 2]; // 例: "information_technology_2"
+        
+        // 講義IDを取得
+        const courseId = await portalData.getCourseIdByFolder(folderName);
+        const course = await portalData.getCourseById(courseId);
+        
+        if (course) {
+          // 講義情報を設定
+          document.getElementById('courseTitle').innerHTML = `<i class="${course.icon || 'fas fa-book'} me-3"></i>${course.name}`;
+          document.getElementById('mobileCourseTitle').innerHTML = `<i class="${course.icon || 'fas fa-book'} me-3"></i>${course.name}`;
+          document.getElementById('courseDescription').textContent = course.description || '';
+          document.getElementById('mobileCourseDescription').textContent = course.description || '';
+          document.title = `${course.name} - 講義ポータル`;
+          
+          // ナビゲーション生成
+          const navHTML = await portalData.generateNavigationHTML(folderName);
+          document.getElementById('pcNavigation').innerHTML = navHTML;
+          document.getElementById('mobileNavigation').innerHTML = navHTML;
+          
+          // コンテンツ生成
+          const contentHTML = await portalData.generateCourseContentHTML(courseId);
+          document.getElementById('courseContent').innerHTML = contentHTML;
+          document.getElementById('mobileCourseContent').innerHTML = contentHTML;
+        } else {
+          // デフォルトの内容（既存の講義ページの場合）
+          await loadDefaultContent(folderName);
+        }
+      } catch (error) {
+        console.error('データの読み込みエラー:', error);
+        // エラー時はデフォルトコンテンツを表示
+        await loadDefaultContent(folderName);
+      }
+    });
+    
+    // デフォルトコンテンツ読み込み（既存の講義ページとの互換性のため）
+    async function loadDefaultContent(folderName) {
+      try {
+        const navHTML = await portalData.generateNavigationHTML(folderName);
+        document.getElementById('pcNavigation').innerHTML = navHTML;
+        document.getElementById('mobileNavigation').innerHTML = navHTML;
+      } catch (error) {
+        console.error('ナビゲーション生成エラー:', error);
+      }
+      
+      // 既存のコンテンツがある場合はそれを表示
+      if (folderName === 'information_technology_2') {
+        document.getElementById('courseTitle').innerHTML = '<i class="fas fa-laptop-code me-3"></i>情報技術II 講義ページ';
+        document.getElementById('mobileCourseTitle').innerHTML = '<i class="fas fa-laptop-code me-3"></i>情報技術II 講義ページ';
+        document.getElementById('courseDescription').textContent = 'プログラミング基礎とアルゴリズムを学びます';
+        document.getElementById('mobileCourseDescription').textContent = 'プログラミング基礎とアルゴリズムを学びます';
+        document.title = '情報技術II 講義ページ';
+      } else if (folderName === 'information_technology_3') {
+        document.getElementById('courseTitle').innerHTML = '<i class="fas fa-database me-3"></i>情報技術III 講義ページ';
+        document.getElementById('mobileCourseTitle').innerHTML = '<i class="fas fa-database me-3"></i>情報技術III 講義ページ';
+        document.getElementById('courseDescription').textContent = 'データベースとWebアプリケーションを学びます';
+        document.getElementById('mobileCourseDescription').textContent = 'データベースとWebアプリケーションを学びます';
+        document.title = '情報技術III 講義ページ';
+      }
+    }
+  </script>
+</body>
+</html>

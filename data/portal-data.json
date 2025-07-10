@@ -1,0 +1,48 @@
+{
+  "courses": [
+    {
+      "id": "info_tech_2",
+      "name": "情報技術II",
+      "description": "プログラミング基礎とアルゴリズム",
+      "icon": "fas fa-laptop-code",
+      "folder": "information_technology_2"
+    },
+    {
+      "id": "info_tech_3", 
+      "name": "情報技術III",
+      "description": "データベースとWebアプリケーション",
+      "icon": "fas fa-database",
+      "folder": "information_technology_3"
+    }
+  ],
+  "content": {
+    "info_tech_2": [
+      {
+        "title": "第1回 講義資料",
+        "type": "class",
+        "url": "/info-tech-portal/information_technology_2/class1.html"
+      },
+      {
+        "title": "第2回 講義資料", 
+        "type": "class",
+        "url": "/info-tech-portal/information_technology_2/class2.html"
+      }
+    ],
+    "info_tech_3": [
+      {
+        "title": "第1回 講義資料",
+        "type": "class", 
+        "url": "/info-tech-portal/information_technology_3/class1.html"
+      },
+      {
+        "title": "第2回 講義資料",
+        "type": "class",
+        "url": "/info-tech-portal/information_technology_3/class2.html"
+      }
+    ]
+  },
+  "links": {
+    "info_tech_2": [],
+    "info_tech_3": []
+  }
+}
