@@ -14,18 +14,22 @@ class PortalDataManager {
   // JSONファイルからデータを読み込み
   async loadJSONData() {
     if (this.jsonDataLoaded && this.jsonData) {
+      console.log('loadJSONData: キャッシュされたJSONデータを返します');
       return this.jsonData;
     }
 
     try {
-      const response = await fetch('/info-tech-portal/data/portal-data.json');
+      console.log('loadJSONData: JSONファイルの読み込みを開始');
+      const response = await fetch('./data/portal-data.json');
+      console.log('loadJSONData: フェッチレスポンス:', response);
+      
       if (response.ok) {
         this.jsonData = await response.json();
         this.jsonDataLoaded = true;
         console.log('JSONデータを読み込みました:', this.jsonData);
         return this.jsonData;
       } else {
-        console.warn('JSONファイルの読み込みに失敗しました。LocalStorageのデータを使用します。');
+        console.warn(`JSONファイルの読み込みに失敗しました。ステータス: ${response.status}。LocalStorageのデータを使用します。`);
         return null;
       }
     } catch (error) {
