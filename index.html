@@ -23,7 +23,6 @@
     };
   </script>
   <script src="https://rubyfuljs.s3.ap-northeast-1.amazonaws.com/rubyful.js" async></script>
-  <script src="js/portal-data.js"></script>
 </head>
 <body>
   <div class="pc-view d-none d-lg-block">
@@ -118,7 +117,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   
-  <script>
+  <script type="module">
+    import { getCourses, generateNavigationHTML, generateCoursesHTML } from './js/portal-data.js';
+    
     // ページ読み込み時に動的コンテンツを生成
     document.addEventListener('DOMContentLoaded', async function() {
       try {
@@ -127,12 +128,12 @@
         document.getElementById('mobileCourses').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>読み込み中...</p></div>';
         
         // ナビゲーション生成
-        const navHTML = await portalData.generateNavigationHTML('home');
+        const navHTML = await generateNavigationHTML('home');
         document.getElementById('pcNavigation').innerHTML = navHTML;
         document.getElementById('mobileNavigation').innerHTML = navHTML;
         
         // 講義カード生成
-        const coursesHTML = await portalData.generateCoursesHTML();
+        const coursesHTML = await generateCoursesHTML();
         document.getElementById('pcCourses').innerHTML = coursesHTML.pcHTML;
         document.getElementById('mobileCourses').innerHTML = coursesHTML.mobileHTML;
         

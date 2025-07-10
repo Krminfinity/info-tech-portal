@@ -200,8 +200,8 @@ class PortalDataManager {
   }
 
   // ナビゲーションメニューを生成
-  generateNavigationHTML(currentPage = '') {
-    const courses = this.getCourses();
+  async generateNavigationHTML(currentPage = '') {
+    const courses = await this.getCourses();
     
     let navHTML = `
       <li class="nav-item">
@@ -324,4 +324,12 @@ class PortalDataManager {
 }
 
 // グローバルインスタンス
-window.portalData = new PortalDataManager();
+const portalDataManager = new PortalDataManager();
+window.portalData = portalDataManager;
+
+// 非同期関数をエクスポート
+export const getCourses = () => portalDataManager.getCourses();
+export const getContent = (courseId) => portalDataManager.getContent(courseId);
+export const getLinks = (courseId, type) => portalDataManager.getLinks(courseId, type);
+export const generateNavigationHTML = (currentPage) => portalDataManager.generateNavigationHTML(currentPage);
+export const generateCoursesHTML = () => portalDataManager.generateCoursesHTML();
