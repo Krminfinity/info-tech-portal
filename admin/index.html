@@ -254,29 +254,32 @@
           <form id="contentForm">
             <input type="hidden" id="contentId">
             <div class="mb-3">
-              <label for="contentTitle" class="form-label">タイトル</label>
+              <label for="contentTitle" class="form-label">タイトル <span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="contentTitle" required>
             </div>
             <div class="mb-3">
-              <label for="contentUrl" class="form-label">URL</label>
+              <label for="contentUrl" class="form-label">URL <span class="text-danger">*</span></label>
               <input type="url" class="form-control" id="contentUrl" required>
+              <div class="form-text">例: https://example.com/resource.pdf</div>
             </div>
             <div class="mb-3">
               <label for="contentDescription" class="form-label">説明</label>
-              <textarea class="form-control" id="contentDescription" rows="2"></textarea>
+              <textarea class="form-control" id="contentDescription" rows="2" placeholder="任意：資料の簡単な説明"></textarea>
             </div>
             <div class="mb-3">
-              <label for="contentCategory" class="form-label">カテゴリ</label>
+              <label for="contentCategory" class="form-label">カテゴリ <span class="text-danger">*</span></label>
               <select class="form-select" id="contentCategory" required>
+                <option value="">カテゴリを選択してください</option>
                 <option value="lecture">講義資料</option>
                 <option value="exercise">演習</option>
-                <option value="exam">試験</option>
+                <option value="exam">試験・確認テスト</option>
                 <option value="reference">参考資料</option>
               </select>
             </div>
             <div class="mb-3">
               <label for="contentOrder" class="form-label">表示順序</label>
               <input type="number" class="form-control" id="contentOrder" value="1" min="1">
+              <div class="form-text">小さい数字ほど上に表示されます（確認テストは最下部に追加されます）</div>
             </div>
           </form>
         </div>
@@ -300,26 +303,28 @@
           <form id="linkForm">
             <input type="hidden" id="linkId">
             <div class="mb-3">
-              <label for="linkTitle" class="form-label">タイトル</label>
+              <label for="linkTitle" class="form-label">タイトル <span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="linkTitle" required>
             </div>
             <div class="mb-3">
-              <label for="linkUrl" class="form-label">URL</label>
+              <label for="linkUrl" class="form-label">URL <span class="text-danger">*</span></label>
               <input type="url" class="form-control" id="linkUrl" required>
+              <div class="form-text">例: https://example.com</div>
             </div>
             <div class="mb-3">
               <label for="linkDescription" class="form-label">説明</label>
-              <textarea class="form-control" id="linkDescription" rows="2"></textarea>
+              <textarea class="form-control" id="linkDescription" rows="2" placeholder="任意：リンクの簡単な説明"></textarea>
             </div>
             <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="linkNewTab">
+              <input type="checkbox" class="form-check-input" id="linkNewTab" checked>
               <label class="form-check-label" for="linkNewTab">
-                新しいタブで開く
+                新しいタブで開く（推奨）
               </label>
             </div>
             <div class="mb-3">
               <label for="linkOrder" class="form-label">表示順序</label>
               <input type="number" class="form-control" id="linkOrder" value="1" min="1">
+              <div class="form-text">小さい数字ほど上に表示されます</div>
             </div>
           </form>
         </div>
