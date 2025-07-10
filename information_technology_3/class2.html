@@ -127,16 +127,20 @@
   </div>
 
   <script type="module">
-    import { getLinks } from '../js/portal-data.js';
+    import { getLinks } from '/info-tech-portal/js/portal-data.js';
 
     async function loadDynamicLinks() {
       try {
+        console.log('動的リンクの読み込みを開始: info_tech_3, class2');
         const links = await getLinks('info_tech_3', 'class2');
+        console.log('取得したリンク:', links);
         if (links && links.length > 0) {
           // PC版の動的リンク追加
           const testsPcEl = document.getElementById('testsPcIt3Cl2');
+          console.log('PC版要素:', testsPcEl);
           if (testsPcEl) {
             links.forEach(link => {
+              console.log('PC版リンク追加:', link.title);
               const li = document.createElement('li');
               const a = document.createElement('a');
               a.href = link.url;
@@ -152,8 +156,10 @@
 
           // モバイル版の動的リンク追加
           const testsMobileEl = document.getElementById('testsMobileIt3Cl2');
+          console.log('モバイル版要素:', testsMobileEl);
           if (testsMobileEl) {
             links.forEach(link => {
+              console.log('モバイル版リンク追加:', link.title);
               const div = document.createElement('div');
               div.className = 'card';
               const cardBody = document.createElement('div');
@@ -170,6 +176,8 @@
               testsMobileEl.appendChild(div);
             });
           }
+        } else {
+          console.log('リンクが見つかりませんでした');
         }
       } catch (error) {
         console.error('動的リンクの読み込みに失敗しました:', error);
