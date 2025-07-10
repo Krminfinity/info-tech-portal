@@ -36,18 +36,25 @@ class PortalDataManager {
 
   // 講義データ取得（JSONファイル優先、フォールバックはLocalStorage）
   async getCourses() {
+    console.log('getCourses: データ取得開始');
     const jsonData = await this.loadJSONData();
+    console.log('getCourses: JSONデータ:', jsonData);
+    
     if (jsonData && jsonData.courses) {
+      console.log('getCourses: JSONから講義データを返します:', jsonData.courses);
       return jsonData.courses;
     }
     
     // フォールバック：LocalStorage
     const localData = JSON.parse(localStorage.getItem(this.storageKeys.courses) || '[]');
+    console.log('getCourses: LocalStorageデータ:', localData);
     if (localData.length > 0) {
+      console.log('getCourses: LocalStorageから講義データを返します');
       return localData;
     }
     
     // デフォルトデータ
+    console.log('getCourses: デフォルトデータを返します');
     return this.getDefaultCourses();
   }
 

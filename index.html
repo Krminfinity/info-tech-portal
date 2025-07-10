@@ -123,17 +123,27 @@
     // ページ読み込み時に動的コンテンツを生成
     document.addEventListener('DOMContentLoaded', async function() {
       try {
+        console.log('ページ読み込み開始');
+        
         // ローディング表示
         document.getElementById('pcCourses').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>読み込み中...</p></div>';
         document.getElementById('mobileCourses').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>読み込み中...</p></div>';
         
+        // 講義データを確認
+        const courses = await getCourses();
+        console.log('取得した講義データ:', courses);
+        
         // ナビゲーション生成
+        console.log('ナビゲーション生成開始');
         const navHTML = await generateNavigationHTML('home');
+        console.log('生成されたナビゲーションHTML:', navHTML);
         document.getElementById('pcNavigation').innerHTML = navHTML;
         document.getElementById('mobileNavigation').innerHTML = navHTML;
         
         // 講義カード生成
+        console.log('講義カード生成開始');
         const coursesHTML = await generateCoursesHTML();
+        console.log('生成された講義カードHTML:', coursesHTML);
         document.getElementById('pcCourses').innerHTML = coursesHTML.pcHTML;
         document.getElementById('mobileCourses').innerHTML = coursesHTML.mobileHTML;
         
