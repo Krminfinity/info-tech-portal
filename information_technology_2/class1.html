@@ -48,7 +48,7 @@
       </form>
       <div id="contentPc" style="display: none; margin-top: 20px;">
         <h2>確認テスト</h2>
-        <ul class="button-list" id="pcTestList">
+        <ul class="button-list">
           <!-- 既存の確認テスト -->
           <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
           <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
@@ -60,8 +60,6 @@
           <li><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="btn btn-custom d-block mb-2">第8回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="btn btn-custom d-block mb-2">第9回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/fWbktTj1W5ddy5iK6" target="_blank" class="btn btn-custom d-block mb-2">Processingファイル提出用（Google Forms）</a></li>
-          <!-- 動的に追加されるテスト -->
-          <div id="dynamicTestsPc"></div>
         </ul>
       </div>
       <p id="errorPc" class="d-none" style="color:red;">パスワードが間違っています。</p>
@@ -115,8 +113,7 @@
           <div class="card"><div class="card-body"><a href="https://forms.gle/5ZZCzX8sSkv83jBeA" target="_blank" class="stretched-link">第7回テスト（Google Forms）</a></div></div>
           <div class="card"><div class="card-body"><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="stretched-link">第8回テスト（Google Forms）</a></div></div>
           <div class="card"><div class="card-body"><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="stretched-link">第9回テスト（Google Forms）</a></div></div>
-          <!-- 動的に追加されるテスト -->
-          <div id="dynamicTestsMobile"></div>
+          <div class="card"><div class="card-body"><a href="https://forms.gle/fWbktTj1W5ddy5iK6" target="_blank" class="stretched-link">Processingファイル提出用（Google Forms）</a></div></div>
         </div>
         <p id="errorMobile" class="d-none" style="color:red;">パスワードが間違っています。</p>
       </div>
@@ -127,49 +124,8 @@
     </div>
   </div>
 
-  <!-- portal-data.jsを読み込み -->
-  <script src="../js/portal-data.js"></script>
-  
   <script>
     const CORRECT_PASSWORD_IT2_CL1 = "ii1passZk";
-    
-    // 動的リンクを読み込む関数
-    async function loadDynamicLinks() {
-      try {
-        const links = await portalData.getLinks('info_tech_2', 'class1');
-        console.log('読み込まれたリンク:', links);
-        
-        if (links && links.length > 0) {
-          // 表示順序でソート
-          links.sort((a, b) => a.order - b.order);
-          
-          // PC版の動的リンクを追加
-          const pcContainer = document.getElementById('dynamicTestsPc');
-          let pcHTML = '';
-          links.forEach(link => {
-            pcHTML += `<li><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="btn btn-custom d-block mb-2">${link.title}</a></li>`;
-          });
-          pcContainer.innerHTML = pcHTML;
-          
-          // モバイル版の動的リンクを追加
-          const mobileContainer = document.getElementById('dynamicTestsMobile');
-          let mobileHTML = '';
-          links.forEach(link => {
-            mobileHTML += `<div class="card"><div class="card-body"><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="stretched-link">${link.title}</a></div></div>`;
-          });
-          mobileContainer.innerHTML = mobileHTML;
-          
-          console.log('動的リンクの追加完了');
-        }
-      } catch (error) {
-        console.error('動的リンクの読み込み中にエラーが発生しました:', error);
-      }
-    }
-    
-    // ページ読み込み時に動的リンクを読み込み
-    document.addEventListener('DOMContentLoaded', function() {
-      loadDynamicLinks();
-    });
     
     function checkPassword() {
       const input = document.getElementById("passwordPc").value;

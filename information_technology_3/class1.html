@@ -56,8 +56,6 @@
           <li><a href="https://forms.gle/UMJvMMV2mo1QB3rG6" target="_blank" class="btn btn-custom d-block mb-2">第4回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/BSABpoBMLDrkDS2A6" target="_blank" class="btn btn-custom d-block mb-2">第5回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/vm1fDzQad6fMnRJH7" target="_blank" class="btn btn-custom d-block mb-2">第6回テスト（Google Forms）</a></li>
-          <!-- 動的に追加されるテスト -->
-          <div id="dynamicTestsPc"></div>
         </ul>
         <h2>関連コード</h2>
         <!--     <ul>
@@ -113,8 +111,6 @@
             <div class="card"><div class="card-body"><a href="https://forms.gle/UMJvMMV2mo1QB3rG6" target="_blank" class="stretched-link">第4回テスト（Google Forms）</a></div></div>
             <div class="card"><div class="card-body"><a href="https://forms.gle/BSABpoBMLDrkDS2A6" target="_blank" class="stretched-link">第5回テスト（Google Forms）</a></div></div>
             <div class="card"><div class="card-body"><a href="https://forms.gle/vm1fDzQad6fMnRJH7" target="_blank" class="stretched-link">第6回テスト（Google Forms）</a></div></div>
-            <!-- 動的に追加されるテスト -->
-            <div id="dynamicTestsMobile"></div>
           </div>
           <h2>関連コード</h2>
           <!--     <ul>
@@ -129,44 +125,6 @@
       </div>
     </div>
   </div>
-
-  <script type="module">
-    import { getLinks } from '../js/portal-data.js';
-
-    async function loadDynamicLinks() {
-      try {
-        const links = await getLinks('info_tech_3', 'class1');
-        
-        if (links && links.length > 0) {
-          // 表示順序でソート
-          links.sort((a, b) => a.order - b.order);
-          
-          // PC版の動的リンクを追加
-          const pcContainer = document.getElementById('dynamicTestsPc');
-          let pcHTML = '';
-          links.forEach(link => {
-            pcHTML += `<li><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="btn btn-custom d-block mb-2">${link.title}</a></li>`;
-          });
-          pcContainer.innerHTML = pcHTML;
-          
-          // モバイル版の動的リンクを追加
-          const mobileContainer = document.getElementById('dynamicTestsMobile');
-          let mobileHTML = '';
-          links.forEach(link => {
-            mobileHTML += `<div class="card"><div class="card-body"><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="stretched-link">${link.title}</a></div></div>`;
-          });
-          mobileContainer.innerHTML = mobileHTML;
-        }
-      } catch (error) {
-        console.error('動的リンクの読み込み中にエラーが発生しました:', error);
-      }
-    }
-    
-    // ページ読み込み時に動的リンクを読み込み
-    document.addEventListener('DOMContentLoaded', function() {
-      loadDynamicLinks();
-    });
-  </script>
 
   <script>
     function checkPasswordPcIt3Cl1() {
