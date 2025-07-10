@@ -1,59 +1,104 @@
-# Lecture Portal
+# 講義ポータル
 
-This project is a simple web portal for students to access lecture materials and tests for the "Information Technology II" (情報技術II) and "Information Technology III" (情報技術III) courses.
+このプロジェクトは、学生が「情報技術II」および「情報技術III」の講義資料やテストにアクセスするためのシンプルなWebポータルです。
 
-## Page URL
+## ページURL
 
-You can access the portal here: [https://krminfinity.github.io/info-tech-portal/] 
+ポータルはこちらからアクセスできます：[https://krminfinity.github.io/info-tech-portal/] 
 
+## プロジェクト構造
 
-## Project Structure
+メインエントリーポイントは `index.html` です。このページから各コース専用のインデックスページにリンクしています。
 
-The main entry point is `index.html`. This page links to course-specific index pages.
+開発とデプロイメントの改善により、主要なコースコンテンツは現在、英語名のディレクトリに整理されています：
 
-Due to improvements for development and deployment, the primary course content is now organized into directories with English names:
+-   `information_technology_2/`：「情報技術II」の資料を含みます。
+    -   `index.html`：情報技術IIのメインページ。
+    -   `class1.html`：1組専用のコンテンツ。
+    -   `class2.html`：2組専用のコンテンツ。
+-   `information_technology_3/`：「情報技術III」の資料を含みます。
+    -   `index.html`：情報技術IIIのメインページ。
+    -   `class1.html`：1組専用のコンテンツ。
+    -   `class2.html`：2組専用のコンテンツ。
 
--   `information_technology_2/`: Contains materials for "Information Technology II".
-    -   `index.html`: Main page for Information Technology II.
-    -   `class1.html`: Content specific to Group 1.
-    -   `class2.html`: Content specific to Group 2.
--   `information_technology_3/`: Contains materials for "Information Technology III".
-    -   `index.html`: Main page for Information Technology III.
-    -   `class1.html`: Content specific to Group 1.
-    -   `class2.html`: Content specific to Group 2.
+**ディレクトリ名に関する重要な注意:**
+元の日本語名ディレクトリ（`情報技術II/`、`情報技術III/`）はリポジトリに残っています。これは、非ASCII文字を含むパスの名前変更で使用した自動化ツールで遭遇した技術的制限によるものです。これらの元のディレクトリは最新のデザイン更新では変更されていません。**英語名ディレクトリ**（`information_technology_2/` および `information_technology_3/`）**内のコンテンツを使用する**ことをお勧めし、必要に応じて、ローカルコピーまたはリポジトリから古い日本語名ディレクトリを手動で削除してください。メインの `index.html` と新しいコースページ内のすべてのリンクは、これらの英語名パスを指すように更新されています。
 
-**Important Note on Directory Names:**
-The original Japanese-named directories (`情報技術II/`, `情報技術III/`) still exist in the repository. This is due to technical limitations encountered with the automated tools used for renaming paths with non-ASCII characters. These original directories were not modified with the latest design updates. It is recommended to **use the content within the English-named directories** (`information_technology_2/` and `information_technology_3/`) and, if desired, manually delete the old Japanese-named directories from your local copy or repository. All links in the main `index.html` and within the new course pages have been updated to point to these English-named paths.
+## デザインとレスポンシブ対応
 
-## Design and Responsiveness
+ポータルのユーザーインターフェースは**Bootstrap 5**を使用して更新され、クリーンでモダンな外観と各種デバイス（デスクトップ、タブレット、モバイル）での応答性を確保しています。
 
-The portal's user interface has been updated and built using **Bootstrap 5** to ensure a clean, modern look and feel, as well as responsiveness across various devices (desktops, tablets, and mobile phones).
+主要なデザイン改善点：
+-   **モダナイズされたスタイリング：** 更新されたボタンスタイル、間隔、より良い視覚階層のためのシャドウの使用。
+-   **モバイル使いやすさの向上：** ボタンのタップターゲットを大きくし、小さな画面でのテキストの読みやすさを最適化。
+-   **一貫したナビゲーション：** すべてのページで明確で一貫したナビゲーションバーを提供。
+-   **レスポンシブレイアウト：** コンテンツが異なる画面サイズに適応し、どのデバイスでも良好なユーザーエクスペリエンスを確保。ビューポートメタタグが正しく設定されています。
 
-Key design improvements include:
--   **Modernized Styling:** Updated button styles, spacing, and use of shadows for better visual hierarchy.
--   **Improved Mobile Usability:** Larger tap targets for buttons and optimized text readability on smaller screens.
--   **Consistent Navigation:** A clear and consistent navigation bar is present across all pages.
--   **Responsive Layout:** Content adapts to different screen sizes, ensuring a good user experience on any device. The viewport meta tag is correctly configured.
+## パスワード保護
 
-## Password Protection
+グループ専用ページ（例：`information_technology_2/class1.html`）はパスワードで保護されています。パスワードチェックはクライアントサイドJavaScriptで処理されます。
 
-The group-specific pages (e.g., `information_technology_2/class1.html`) are password protected. The password check is handled via client-side JavaScript.
+## プログレッシブウェブアプリ（PWA）機能
 
+このポータルはプログレッシブウェブアプリ（PWA）として設定されています。以下が含まれます：
+-   `manifest.json`ファイル：アプリケーションを記述し、対応デバイスのホーム画面に追加できるようにします。
+-   `service-worker.js`ファイル：オフライン機能を有効にし、アセットをキャッシュしてパフォーマンスを向上させることができます。
 
-## Progressive Web App (PWA) Features
+これにより、ポータルをデバイスに「インストール」してより簡単にアクセスでき、サービスワーカーが設定されていればオフラインでも動作する可能性があります。
 
-This portal is configured as a Progressive Web App (PWA). It includes:
--   A `manifest.json` file, which describes the application and allows it to be added to the home screen on supported devices.
--   A `service-worker.js` file, which can enable offline capabilities and improve performance by caching assets.
+## ルビ（ふりがな）機能
 
-This means the portal can be "installed" on a device for easier access, and potentially work offline if the service worker is configured for it.
+ポータルには**Rubyfulライブラリ**を活用したルビ（ふりがな）機能が含まれており、学生が難しい漢字を読むのを支援します。このアクセシビリティ機能は、特に留学生や日本語を学習している方に役立ちます。
 
-## Future Improvements
+### ルビ機能の動作
 
-Some potential areas for future improvement include:
--   **More Secure Authentication:** Implementing a server-side authentication system instead of hardcoded passwords in HTML.
--   **Dynamic Content Loading:** Fetching course materials or test links from a database or external files, rather than hardcoding them in each HTML page.
--   **Further UI/UX Enhancements:** Continuously refining the visual design and user experience based on feedback.
--   **Admin Interface:** A way for instructors to manage courses, groups, and passwords without directly editing HTML files.
--   **Full Offline Support:** Enhancing the service worker to cache all necessary resources for complete offline access to materials.
--   **Streamline Directory Structure:** Resolve the co-existence of Japanese and English named directories by removing the outdated Japanese-named ones once tooling or manual processes allow.
+1. **初期状態：** ページを最初に読み込んだときは、ルビ機能は無効になっています
+2. **ライブラリの読み込み：** ページが開かれると、Rubyfulライブラリがバックグラウンドで自動的に読み込まれます
+3. **手動での有効化：** ユーザーはRubyfulが提供する内蔵トグルボタンを使用してルビ機能を有効/無効にできます
+4. **自動検出：** 有効にすると、ライブラリが自動的に難しい漢字を検出し、ふりがな（ルビ注釈）を追加します
+
+### ルビ機能の使用方法
+
+1. **トグルボタンを見つける：** 任意のページでRubyfulトグルボタンを探してください（通常、インターフェースに小さなボタンとして表示されます）
+2. **ルビを有効にする：** トグルボタンをクリックしてふりがな表示を有効にします
+3. **ふりがなを確認する：** 難しい漢字の上に小さなひらがなが表示されるようになります
+4. **必要に応じて無効にする：** トグルボタンを再度クリックして機能を無効にします
+
+### メリット
+
+- **読みやすさの向上：** 複雑な漢字をよりアクセシブルにします
+- **学習支援：** 学生が正しい発音を学ぶのを助けます
+- **パフォーマンスへの影響なし：** 必要なときだけ読み込まれ、ページを高速に保ちます
+- **自動検出：** 手動選択不要 - すべてのテキストコンテンツで動作します
+
+### 技術的実装
+
+- **遅延読み込み：** Rubyfulライブラリは非同期で読み込まれ、初期ページ読み込みの遅延を防ぎます
+- **自動無効化：** 各ページはデフォルトでルビが無効な状態で開始されます（`Rubyful.disable()`）
+- **ページ間の一貫性：** ポータルのすべてのページで機能が一貫して動作します
+- **レスポンシブデザイン：** ルビ注釈はデスクトップとモバイルデバイスの両方で適切に動作します
+
+## 今後の改善予定
+
+将来的な改善の可能性がある分野：
+-   **より安全な認証：** HTMLにハードコードされたパスワードではなく、サーバーサイド認証システムの実装。
+-   **動的コンテンツ読み込み：** 各HTMLページにハードコードするのではなく、データベースや外部ファイルからコース資料やテストリンクを取得。
+-   **さらなるUI/UX強化：** フィードバックに基づく視覚デザインとユーザーエクスペリエンスの継続的な改良。
+-   **管理者インターフェース：** 講師がHTMLファイルを直接編集することなく、コース、グループ、パスワードを管理する方法。
+-   **完全オフラインサポート：** サービスワーカーを強化して、資料への完全なオフラインアクセスに必要なすべてのリソースをキャッシュ。
+-   **ディレクトリ構造の整理：** ツールや手動プロセスが許可されたら、時代遅れの日本語名ディレクトリを削除して、日本語と英語の名前付きディレクトリの共存を解決。
+-   **ルビ機能の強化：** ルビ設定のユーザー設定保存、カスタム漢字難易度レベル、または学習管理システムとの統合を追加。
+
+## アクセシビリティ機能
+
+### ルビ（ふりがな）サポート
+- **自動漢字検出**とふりがな注釈
+- **デフォルト無効状態**で最適なパフォーマンス
+- **ユーザー制御の有効化**トグルボタン経由
+- **クロスプラットフォーム対応**（デスクトップおよびモバイル）
+
+### レスポンシブデザイン
+- **モバイルファースト手法**でタッチフレンドリーなインターフェース
+- **スケーラブルなフォントとボタン**で様々な画面サイズに対応
+- **高コントラストデザイン**でより良い読みやすさ
+- **キーボードナビゲーションサポート**でアクセシビリティ準拠

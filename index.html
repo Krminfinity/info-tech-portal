@@ -17,22 +17,12 @@
       navigator.serviceWorker.register('/service-worker.js');
     }
     
-    // Rubyfulライブラリを動的に読み込み（既定でOFF状態）
-    window.addEventListener('DOMContentLoaded', function() {
-      const script = document.createElement('script');
-      script.src = 'https://rubyfuljs.s3.ap-northeast-1.amazonaws.com/rubyful.js';
-      script.async = true;
-      
-      script.onload = function() {
-        // ライブラリ読み込み後、既定では無効状態に設定
-        if (window.Rubyful) {
-          window.Rubyful.disable();
-        }
-      };
-      
-      document.head.appendChild(script);
-    });
+    // Rubyful.jsの設定（デフォルトでルビ表示OFF）
+    window.RubyfulJsApp = {
+      defaultDisplay: false
+    };
   </script>
+  <script src="https://rubyfuljs.s3.ap-northeast-1.amazonaws.com/rubyful.js" async></script>
 </head>
 <body>
   <div class="pc-view d-none d-lg-block">
