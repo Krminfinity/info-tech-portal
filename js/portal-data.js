@@ -7,28 +7,97 @@ class PortalDataManager {
       content: 'portal_content',
       links: 'portal_links'
     };
+    this.jsonDataLoaded = false;
+    this.jsonData = null;
   }
 
-  // 講義データ取得
-  getCourses() {
-    return JSON.parse(localStorage.getItem(this.storageKeys.courses) || '[]');
+  // JSONファイルからデータを読み込み
+  async loadJSONData() {
+    if (this.jsonDataLoaded && this.jsonData) {
+      return this.jsonData;
+    }
+
+    try {
+      const response = await fetch('/info-tech-portal/data/portal-data.json');
+      if (response.ok) {
+        this.jsonData = await response.json();
+        this.jsonDataLoaded = true;
+        console.log('JSONデータを読み込みました:', this.jsonData);
+        return this.jsonData;
+      } else {
+        console.warn('JSONファイルの読み込みに失敗しました。LocalStorageのデータを使用します。');
+        return null;
+      }
+    } catch (error) {
+      console.warn('JSONファイルの読み込み中にエラーが発生しました:', error);
+      return null;
+    }
+  }
+
+  // 講義データ取得（JSONファイル優先、フォールバックはLocalStorage）
+  async getCourses() {
+    const jsonData = await this.loadJSONData();
+    if (jsonData && jsonData.courses) {
+      return jsonData.courses;
+    }
+    
+    // フォールバック：LocalStorage
+    const localData = JSON.parse(localStorage.getItem(this.storageKeys.courses) || '[]');
+    if (localData.length > 0) {
+      return localData;
+    }
+    
+    // デフォルトデータ
+    return this.getDefaultCourses();
   }
 
   // コンテンツデータ取得
-  getContent(courseId = null) {
+  async getContent(courseId = null) {
+    const jsonData = await this.loadJSONData();
+    if (jsonData && jsonData.content) {
+      return courseId ? (jsonData.content[courseId] || []) : jsonData.content;
+    }
+    
+    // フォールバック：LocalStorage
     const content = JSON.parse(localStorage.getItem(this.storageKeys.content) || '{}');
     return courseId ? (content[courseId] || []) : content;
   }
 
   // リンクデータ取得
-  getLinks(courseId = null) {
-    const links = JSON.parse(localStorage.getItem(this.storageKeys.links) || '{}');
-    return courseId ? (links[courseId] || []) : links;
+  async getLinks(courseId = null, type = null) {
+    const jsonData = await this.loadJSONData();
+    if (jsonData && jsonData.links) {
+      let links = jsonData.links;
+      
+      if (courseId) {
+        links = links.filter(link => link.courseId === courseId);
+      }
+      
+      if (type) {
+        links = links.filter(link => link.type === type);
+      }
+      
+      return links;
+    }
+    
+    // フォールバック：LocalStorage
+    const links = JSON.parse(localStorage.getItem(this.storageKeys.links) || '[]');
+    let filteredLinks = links;
+    
+    if (courseId) {
+      filteredLinks = filteredLinks.filter(link => link.courseId === courseId);
+    }
+    
+    if (type) {
+      filteredLinks = filteredLinks.filter(link => link.type === type);
+    }
+    
+    return filteredLinks;
   }
 
   // 講義一覧をHTMLで生成
-  generateCoursesHTML() {
-    const courses = this.getCourses();
+  async generateCoursesHTML() {
+    const courses = await this.getCourses();
     
     if (courses.length === 0) {
       return this.getDefaultCoursesHTML();
@@ -220,16 +289,36 @@ class PortalDataManager {
     return html;
   }
 
-  // 講義フォルダ名から講義IDを取得
-  getCourseIdByFolder(folderName) {
-    const courses = this.getCourses();
+  // デフォルト講義データ
+  getDefaultCourses() {
+    return [
+      {
+        "id": "info_tech_2",
+        "name": "情報技術II",
+        "description": "プログラミング基礎とアルゴリズム",
+        "icon": "fas fa-laptop-code",
+        "folder": "information_technology_2"
+      },
+      {
+        "id": "info_tech_3",
+        "name": "情報技術III",
+        "description": "データベースとWebアプリケーション",
+        "icon": "fas fa-database",
+        "folder": "information_technology_3"
+      }
+    ];
+  }
+
+  // 講義フォルダ名から講義IDを取得（非同期対応）
+  async getCourseIdByFolder(folderName) {
+    const courses = await this.getCourses();
     const course = courses.find(c => c.folder === folderName);
     return course ? course.id : null;
   }
 
-  // 講義IDから講義情報を取得
-  getCourseById(courseId) {
-    const courses = this.getCourses();
+  // 講義IDから講義情報を取得（非同期対応）
+  async getCourseById(courseId) {
+    const courses = await this.getCourses();
     return courses.find(c => c.id === courseId);
   }
 }

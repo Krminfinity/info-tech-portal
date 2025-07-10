@@ -49,7 +49,7 @@
       <div id="contentPcIt3Cl2" style="display: none; margin-top: 20px;">
         <h2>確認テスト</h2>
         確認テストは、スマホで回答してください。スマホの設定言語で問題が表示されるので、日本語が得意でない人は、スマホの設定を英語や自分の国の言葉にしてください。
-        <ul class="button-list">
+        <ul class="button-list" id="testsPcIt3Cl2">
           <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
           <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/Po9w1fwC4NJLDBND9" target="_blank" class="btn btn-custom d-block mb-2">第3回テスト（Google Forms）</a></li>
@@ -104,12 +104,14 @@
         <div id="contentMobileIt3Cl2" style="display: none; margin-top: 20px;">
           <h2>確認テスト</h2>
           確認テストは、スマホで回答してください。スマホの設定言語で問題が表示されるので、日本語が得意でない人は、スマホの設定を英語や自分の国の言葉にしてください。
-          <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第1回テスト（Google Forms）</a></div></div>
-          <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第2回テスト（Google Forms）</a></div></div>
-          <div class="card"><div class="card-body"><a href="https://forms.gle/Po9w1fwC4NJLDBND9" target="_blank" class="stretched-link">第3回テスト（Google Forms）</a></div></div>
-          <div class="card"><div class="card-body"><a href="https://forms.gle/muAqBzFxmVRQJn2Z7" target="_blank" class="stretched-link">第4回テスト（Google Forms）</a></div></div>
-          <div class="card"><div class="card-body"><a href="https://forms.gle/JaRVecdRmkY2gP527" target="_blank" class="stretched-link">第5回テスト（Google Forms）</a></div></div>
-          <div class="card"><div class="card-body"><a href="https://forms.gle/3sjbATfqm4oGRhiY7" target="_blank" class="stretched-link">第6回テスト（Google Forms）</a></div></div>
+          <div id="testsMobileIt3Cl2">
+            <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第1回テスト（Google Forms）</a></div></div>
+            <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第2回テスト（Google Forms）</a></div></div>
+            <div class="card"><div class="card-body"><a href="https://forms.gle/Po9w1fwC4NJLDBND9" target="_blank" class="stretched-link">第3回テスト（Google Forms）</a></div></div>
+            <div class="card"><div class="card-body"><a href="https://forms.gle/muAqBzFxmVRQJn2Z7" target="_blank" class="stretched-link">第4回テスト（Google Forms）</a></div></div>
+            <div class="card"><div class="card-body"><a href="https://forms.gle/JaRVecdRmkY2gP527" target="_blank" class="stretched-link">第5回テスト（Google Forms）</a></div></div>
+            <div class="card"><div class="card-body"><a href="https://forms.gle/3sjbATfqm4oGRhiY7" target="_blank" class="stretched-link">第6回テスト（Google Forms）</a></div></div>
+          </div>
           <h2>関連コード</h2>
           <!--     <ul>
             <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
@@ -123,6 +125,60 @@
       </div>
     </div>
   </div>
+
+  <script type="module">
+    import { getLinks } from '../js/portal-data.js';
+
+    async function loadDynamicLinks() {
+      try {
+        const links = await getLinks('info_tech_3', 'class2');
+        if (links && links.length > 0) {
+          // PC版の動的リンク追加
+          const testsPcEl = document.getElementById('testsPcIt3Cl2');
+          if (testsPcEl) {
+            links.forEach(link => {
+              const li = document.createElement('li');
+              const a = document.createElement('a');
+              a.href = link.url;
+              a.textContent = link.title;
+              a.className = 'btn btn-custom d-block mb-2';
+              if (link.newTab) {
+                a.target = '_blank';
+              }
+              li.appendChild(a);
+              testsPcEl.appendChild(li);
+            });
+          }
+
+          // モバイル版の動的リンク追加
+          const testsMobileEl = document.getElementById('testsMobileIt3Cl2');
+          if (testsMobileEl) {
+            links.forEach(link => {
+              const div = document.createElement('div');
+              div.className = 'card';
+              const cardBody = document.createElement('div');
+              cardBody.className = 'card-body';
+              const a = document.createElement('a');
+              a.href = link.url;
+              a.textContent = link.title;
+              a.className = 'stretched-link';
+              if (link.newTab) {
+                a.target = '_blank';
+              }
+              cardBody.appendChild(a);
+              div.appendChild(cardBody);
+              testsMobileEl.appendChild(div);
+            });
+          }
+        }
+      } catch (error) {
+        console.error('動的リンクの読み込みに失敗しました:', error);
+      }
+    }
+
+    // DOMContentLoaded後に動的リンクを読み込み
+    document.addEventListener('DOMContentLoaded', loadDynamicLinks);
+  </script>
 
   <script>
     function checkPasswordPcIt3Cl2() {

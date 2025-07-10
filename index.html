@@ -120,16 +120,30 @@
   
   <script>
     // ページ読み込み時に動的コンテンツを生成
-    document.addEventListener('DOMContentLoaded', function() {
-      // ナビゲーション生成
-      const navHTML = portalData.generateNavigationHTML('home');
-      document.getElementById('pcNavigation').innerHTML = navHTML;
-      document.getElementById('mobileNavigation').innerHTML = navHTML;
-      
-      // 講義カード生成
-      const coursesHTML = portalData.generateCoursesHTML();
-      document.getElementById('pcCourses').innerHTML = coursesHTML.pcHTML;
-      document.getElementById('mobileCourses').innerHTML = coursesHTML.mobileHTML;
+    document.addEventListener('DOMContentLoaded', async function() {
+      try {
+        // ローディング表示
+        document.getElementById('pcCourses').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>読み込み中...</p></div>';
+        document.getElementById('mobileCourses').innerHTML = '<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>読み込み中...</p></div>';
+        
+        // ナビゲーション生成
+        const navHTML = await portalData.generateNavigationHTML('home');
+        document.getElementById('pcNavigation').innerHTML = navHTML;
+        document.getElementById('mobileNavigation').innerHTML = navHTML;
+        
+        // 講義カード生成
+        const coursesHTML = await portalData.generateCoursesHTML();
+        document.getElementById('pcCourses').innerHTML = coursesHTML.pcHTML;
+        document.getElementById('mobileCourses').innerHTML = coursesHTML.mobileHTML;
+        
+        console.log('ページコンテンツの読み込み完了');
+      } catch (error) {
+        console.error('ページコンテンツの読み込み中にエラーが発生しました:', error);
+        
+        // エラー時のフォールバック
+        document.getElementById('pcCourses').innerHTML = '<div class="alert alert-danger">データの読み込みに失敗しました。</div>';
+        document.getElementById('mobileCourses').innerHTML = '<div class="alert alert-danger">データの読み込みに失敗しました。</div>';
+      }
     });
   </script>
 </body>

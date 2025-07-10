@@ -58,7 +58,9 @@
           <li><a href="https://forms.gle/gSnnak1FmF3CghRK9" target="_blank" class="btn btn-custom d-block mb-2">第7回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/dMgZJWxabV2EEMeY8" target="_blank" class="btn btn-custom d-block mb-2">第8回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/aEivrpHjgESRbbCL8" target="_blank" class="btn btn-custom d-block mb-2">第9回テスト（Google Forms）</a></li>
-          <a href="https://forms.gle/WE7VrjqRcV52ZCnT7" target="_blank" class="btn btn-custom d-block mb-2">Processingファイル提出用（Google Forms）</a></li>
+          <li><a href="https://forms.gle/WE7VrjqRcV52ZCnT7" target="_blank" class="btn btn-custom d-block mb-2">Processingファイル提出用（Google Forms）</a></li>
+          <!-- 動的に追加されるテスト -->
+          <div id="dynamicTestsPcIt2Cl2"></div>
         </ul>
       </div>
       <p id="errorPcIt2Cl2" class="d-none" style="color:red;">パスワードが間違っています。</p>
@@ -121,7 +123,50 @@
     </div>
   </div>
 
+  <!-- portal-data.jsを読み込み -->
+  <script src="../js/portal-data.js"></script>
+  
   <script>
+    // 動的リンクを読み込む関数
+    async function loadDynamicLinks() {
+      try {
+        const links = await portalData.getLinks('info_tech_2', 'class2');
+        console.log('読み込まれたリンク:', links);
+        
+        if (links && links.length > 0) {
+          // 表示順序でソート
+          links.sort((a, b) => a.order - b.order);
+          
+          // PC版の動的リンクを追加
+          const pcContainer = document.getElementById('dynamicTestsPcIt2Cl2');
+          let pcHTML = '';
+          links.forEach(link => {
+            pcHTML += `<li><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="btn btn-custom d-block mb-2">${link.title}</a></li>`;
+          });
+          pcContainer.innerHTML = pcHTML;
+          
+          // モバイル版の動的リンクを追加（モバイル版のコンテナIDも確認必要）
+          const mobileContainer = document.getElementById('dynamicTestsMobileIt2Cl2');
+          if (mobileContainer) {
+            let mobileHTML = '';
+            links.forEach(link => {
+              mobileHTML += `<div class="card"><div class="card-body"><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="stretched-link">${link.title}</a></div></div>`;
+            });
+            mobileContainer.innerHTML = mobileHTML;
+          }
+          
+          console.log('動的リンクの追加完了');
+        }
+      } catch (error) {
+        console.error('動的リンクの読み込み中にエラーが発生しました:', error);
+      }
+    }
+    
+    // ページ読み込み時に動的リンクを読み込み
+    document.addEventListener('DOMContentLoaded', function() {
+      loadDynamicLinks();
+    });
+    
     function checkPasswordPcIt2Cl2() {
       const pw = "ii2passJp";
       const input = document.getElementById("passwordPcIt2Cl2").value;
@@ -145,6 +190,7 @@
       }
     }
   </script>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

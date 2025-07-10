@@ -48,7 +48,8 @@
       </form>
       <div id="contentPc" style="display: none; margin-top: 20px;">
         <h2>確認テスト</h2>
-        <ul class="button-list">
+        <ul class="button-list" id="pcTestList">
+          <!-- 既存の確認テスト -->
           <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第1回テスト（Google Forms）</a></li>
           <li><a href="#" target="_blank" class="btn btn-custom d-block mb-2">第2回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/pCbrnq4Jqjt7wFhw6" target="_blank" class="btn btn-custom d-block mb-2">第3回テスト（Google Forms）</a></li>
@@ -59,6 +60,8 @@
           <li><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="btn btn-custom d-block mb-2">第8回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="btn btn-custom d-block mb-2">第9回テスト（Google Forms）</a></li>
           <li><a href="https://forms.gle/fWbktTj1W5ddy5iK6" target="_blank" class="btn btn-custom d-block mb-2">Processingファイル提出用（Google Forms）</a></li>
+          <!-- 動的に追加されるテスト -->
+          <div id="dynamicTestsPc"></div>
         </ul>
       </div>
       <p id="errorPc" class="d-none" style="color:red;">パスワードが間違っています。</p>
@@ -102,6 +105,7 @@
         </form>
         <div id="contentMobile" style="display: none; margin-top: 20px;">
           <h2>確認テスト</h2>
+          <!-- 既存の確認テスト -->
           <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第1回テスト（Google Forms）</a></div></div>
           <div class="card"><div class="card-body"><a href="#" target="_blank" class="stretched-link">第2回テスト（Google Forms）</a></div></div>
           <div class="card"><div class="card-body"><a href="https://forms.gle/pCbrnq4Jqjt7wFhw6" target="_blank" class="stretched-link">第3回テスト（Google Forms）</a></div></div>
@@ -111,6 +115,8 @@
           <div class="card"><div class="card-body"><a href="https://forms.gle/5ZZCzX8sSkv83jBeA" target="_blank" class="stretched-link">第7回テスト（Google Forms）</a></div></div>
           <div class="card"><div class="card-body"><a href="https://forms.gle/jUhykWKph5pMXMru6" target="_blank" class="stretched-link">第8回テスト（Google Forms）</a></div></div>
           <div class="card"><div class="card-body"><a href="https://forms.gle/bxPzKGj1v17QSisn6" target="_blank" class="stretched-link">第9回テスト（Google Forms）</a></div></div>
+          <!-- 動的に追加されるテスト -->
+          <div id="dynamicTestsMobile"></div>
         </div>
         <p id="errorMobile" class="d-none" style="color:red;">パスワードが間違っています。</p>
       </div>
@@ -121,47 +127,53 @@
     </div>
   </div>
 
+  <!-- portal-data.jsを読み込み -->
+  <script src="../js/portal-data.js"></script>
+  
   <script>
-    const CORRECT_PASSWORD_IT2_CL1 = "ii1passZk"; // Unique constant name
-    function checkPassword() { // For PC view
-      const input = document.getElementById("passwordPc").value;
-      if (input === CORRECT_PASSWORD_IT2_CL1) {
-        document.getElementById("contentPc").style.display = "block";
-        document.getElementById("errorPc").classList.add("d-none");
-      } else {
-        document.getElementById("contentPc").style.display = "none";
-        document.getElementById("errorPc").classList.remove("d-none");
+    const CORRECT_PASSWORD_IT2_CL1 = "ii1passZk";
+    
+    // 動的リンクを読み込む関数
+    async function loadDynamicLinks() {
+      try {
+        const links = await portalData.getLinks('info_tech_2', 'class1');
+        console.log('読み込まれたリンク:', links);
+        
+        if (links && links.length > 0) {
+          // 表示順序でソート
+          links.sort((a, b) => a.order - b.order);
+          
+          // PC版の動的リンクを追加
+          const pcContainer = document.getElementById('dynamicTestsPc');
+          let pcHTML = '';
+          links.forEach(link => {
+            pcHTML += `<li><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="btn btn-custom d-block mb-2">${link.title}</a></li>`;
+          });
+          pcContainer.innerHTML = pcHTML;
+          
+          // モバイル版の動的リンクを追加
+          const mobileContainer = document.getElementById('dynamicTestsMobile');
+          let mobileHTML = '';
+          links.forEach(link => {
+            mobileHTML += `<div class="card"><div class="card-body"><a href="${link.url}" target="${link.newTab ? '_blank' : '_self'}" class="stretched-link">${link.title}</a></div></div>`;
+          });
+          mobileContainer.innerHTML = mobileHTML;
+          
+          console.log('動的リンクの追加完了');
+        }
+      } catch (error) {
+        console.error('動的リンクの読み込み中にエラーが発生しました:', error);
       }
     }
-    function checkPasswordMobile() { // For Mobile view
-      const input = document.getElementById("passwordMobile").value;
-      if (input === CORRECT_PASSWORD_IT2_CL1) {
-        document.getElementById("contentMobile").style.display = "block";
-        document.getElementById("errorMobile").classList.add("d-none");
-      } else {
-        document.getElementById("contentMobile").style.display = "none";
-        document.getElementById("errorMobile").classList.remove("d-none");
-      }
-    }
-    // Consolidate if possible, or ensure forms call the right function.
-    // The PC form needs to call checkPassword() and mobile form checkPasswordMobile().
-    // For this structure, I'll update the PC form's onsubmit to call checkPassword()
-    // and ensure ids are unique (passwordPc, contentPc, errorPc).
-    // And mobile form onsubmit calls checkPasswordMobile() (passwordMobile, contentMobile, errorMobile).
-    // The original script was simple. I'll adapt it to work with unique IDs for PC and Mobile.
-    // Corrected in the forms above: passwordPc/contentPc/errorPc and passwordMobile/contentMobile/errorMobile
-    // The script below is a combined approach, but the forms above now call specific functions.
-    // The original script was singular; I need to make sure IDs are unique if I want two forms in the DOM.
-    // The provided HTML structure uses unique IDs (e.g. passwordPc, passwordMobile).
-    // I will update the script to reflect this, ensuring each form calls its respective function.
-    // The script logic for checkPassword and checkPasswordMobile should be distinct.
-    // The script tag below should contain *both* functions if they are called from different forms.
-  </script>
-  <script> // Script for PC view form
+    
+    // ページ読み込み時に動的リンクを読み込み
+    document.addEventListener('DOMContentLoaded', function() {
+      loadDynamicLinks();
+    });
+    
     function checkPassword() {
-      const pw = "ii1passZk"; // Keep original password logic separate
       const input = document.getElementById("passwordPc").value;
-      if (input === pw) {
+      if (input === CORRECT_PASSWORD_IT2_CL1) {
         document.getElementById("contentPc").style.display = "block";
         document.getElementById("errorPc").classList.add("d-none");
       } else {
@@ -169,12 +181,10 @@
         document.getElementById("errorPc").classList.remove("d-none");
       }
     }
-  </script>
-  <script> // Script for Mobile view form
+    
     function checkPasswordMobile() {
-      const pw = "ii1passZk"; // Keep original password logic separate
       const input = document.getElementById("passwordMobile").value;
-      if (input === pw) {
+      if (input === CORRECT_PASSWORD_IT2_CL1) {
         document.getElementById("contentMobile").style.display = "block";
         document.getElementById("errorMobile").classList.add("d-none");
       } else {
@@ -183,6 +193,7 @@
       }
     }
   </script>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
