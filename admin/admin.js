@@ -8,6 +8,8 @@ const STORAGE_KEYS = {
   courses: 'portal_courses',
   content: 'portal_content',
   links: 'portal_links',
+  classContent: 'portal_class_content',
+  classLinks: 'portal_class_links',
   isLoggedIn: 'portal_admin_logged_in'
 };
 
@@ -80,9 +82,17 @@ function initializeEventListeners() {
   // 講義保存
   document.getElementById('saveCourse').addEventListener('click', saveCourse);
 
+  // 資料・リンク保存
+  document.getElementById('saveContent').addEventListener('click', saveContent);
+  document.getElementById('saveLink').addEventListener('click', saveLink);
+
   // 講義選択
   document.getElementById('courseSelect').addEventListener('change', loadCourseContent);
   document.getElementById('linkCourseSelect').addEventListener('change', loadCourseLinks);
+  
+  // コンテンツタイプ選択
+  document.getElementById('contentTypeSelect').addEventListener('change', loadCourseContent);
+  document.getElementById('linkTypeSelect').addEventListener('change', loadCourseLinks);
 }
 
 // セクション切り替え
@@ -588,5 +598,284 @@ function resetToDefault() {
     loadData();
     
     alert('デフォルトデータにリセットされました。');
+  }
+}
+
+// 資料保存機能
+function saveContent() {
+  const form = document.getElementById('contentForm');
+  const formData = new FormData(form);
+  
+  const courseSelect = document.getElementById('courseSelect');
+  const contentTypeSelect = document.getElementById('contentTypeSelect');
+  const selectedCourse = courseSelect.value;
+  const contentType = contentTypeSelect.value;
+  
+  if (!selectedCourse) {
+    alert('講義を選択してください。');
+    return;
+  }
+  
+  const content = {
+    id: document.getElementById('contentId').value || generateId(),
+    title: document.getElementById('contentTitle').value,
+    url: document.getElementById('contentUrl').value,
+    description: document.getElementById('contentDescription').value,
+    category: document.getElementById('contentCategory').value,
+    order: parseInt(document.getElementById('contentOrder').value),
+    courseId: selectedCourse,
+    type: contentType
+  };
+  
+  let allContent = JSON.parse(localStorage.getItem(STORAGE_KEYS.content) || '[]');
+  
+  // 既存の資料を更新または新規追加
+  const existingIndex = allContent.findIndex(c => c.id === content.id);
+  if (existingIndex >= 0) {
+    allContent[existingIndex] = content;
+  } else {
+    allContent.push(content);
+  }
+  
+  localStorage.setItem(STORAGE_KEYS.content, JSON.stringify(allContent));
+  
+  // モーダルを閉じる
+  const modal = bootstrap.Modal.getInstance(document.getElementById('contentModal'));
+  modal.hide();
+  
+  // リストを更新
+  loadCourseContent();
+  
+  alert('資料が保存されました。');
+}
+
+// リンク保存機能
+function saveLink() {
+  const form = document.getElementById('linkForm');
+  const formData = new FormData(form);
+  
+  const courseSelect = document.getElementById('linkCourseSelect');
+  const linkTypeSelect = document.getElementById('linkTypeSelect');
+  const selectedCourse = courseSelect.value;
+  const linkType = linkTypeSelect.value;
+  
+  if (!selectedCourse) {
+    alert('講義を選択してください。');
+    return;
+  }
+  
+  const link = {
+    id: document.getElementById('linkId').value || generateId(),
+    title: document.getElementById('linkTitle').value,
+    url: document.getElementById('linkUrl').value,
+    description: document.getElementById('linkDescription').value,
+    newTab: document.getElementById('linkNewTab').checked,
+    order: parseInt(document.getElementById('linkOrder').value),
+    courseId: selectedCourse,
+    type: linkType
+  };
+  
+  let allLinks = JSON.parse(localStorage.getItem(STORAGE_KEYS.links) || '[]');
+  
+  // 既存のリンクを更新または新規追加
+  const existingIndex = allLinks.findIndex(l => l.id === link.id);
+  if (existingIndex >= 0) {
+    allLinks[existingIndex] = link;
+  } else {
+    allLinks.push(link);
+  }
+  
+  localStorage.setItem(STORAGE_KEYS.links, JSON.stringify(allLinks));
+  
+  // モーダルを閉じる
+  const modal = bootstrap.Modal.getInstance(document.getElementById('linkModal'));
+  modal.hide();
+  
+  // リストを更新
+  loadCourseLinks();
+  
+  alert('リンクが保存されました。');
+}
+
+// 拡張されたコンテンツ読み込み機能
+function loadCourseContent() {
+  const selectedCourse = document.getElementById('courseSelect').value;
+  const contentType = document.getElementById('contentTypeSelect').value;
+  const contentDiv = document.getElementById('contentManagement');
+  
+  if (!selectedCourse) {
+    contentDiv.innerHTML = '<p class="text-muted">講義を選択してください。</p>';
+    return;
+  }
+  
+  const allContent = JSON.parse(localStorage.getItem(STORAGE_KEYS.content) || '[]');
+  const courseContent = allContent.filter(c => c.courseId === selectedCourse && c.type === contentType);
+  
+  if (courseContent.length === 0) {
+    contentDiv.innerHTML = `<p class="text-muted">この講義の${getContentTypeLabel(contentType)}はありません。</p>`;
+    return;
+  }
+  
+  // 表示順序でソート
+  courseContent.sort((a, b) => a.order - b.order);
+  
+  let html = `<h6>${getContentTypeLabel(contentType)}</h6><div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>順序</th>
+          <th>タイトル</th>
+          <th>カテゴリ</th>
+          <th>URL</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>`;
+  
+  courseContent.forEach(content => {
+    html += `
+      <tr>
+        <td>${content.order}</td>
+        <td>${content.title}</td>
+        <td>${getCategoryLabel(content.category)}</td>
+        <td><a href="${content.url}" target="_blank" class="btn btn-sm btn-outline-primary">開く</a></td>
+        <td>
+          <button class="btn btn-sm btn-warning" onclick="editContent('${content.id}')">編集</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteContent('${content.id}')">削除</button>
+        </td>
+      </tr>`;
+  });
+  
+  html += '</tbody></table></div>';
+  contentDiv.innerHTML = html;
+}
+
+// 拡張されたリンク読み込み機能
+function loadCourseLinks() {
+  const selectedCourse = document.getElementById('linkCourseSelect').value;
+  const linkType = document.getElementById('linkTypeSelect').value;
+  const linkDiv = document.getElementById('linkManagement');
+  
+  if (!selectedCourse) {
+    linkDiv.innerHTML = '<p class="text-muted">講義を選択してください。</p>';
+    return;
+  }
+  
+  const allLinks = JSON.parse(localStorage.getItem(STORAGE_KEYS.links) || '[]');
+  const courseLinks = allLinks.filter(l => l.courseId === selectedCourse && l.type === linkType);
+  
+  if (courseLinks.length === 0) {
+    linkDiv.innerHTML = `<p class="text-muted">この講義の${getContentTypeLabel(linkType)}はありません。</p>`;
+    return;
+  }
+  
+  // 表示順序でソート
+  courseLinks.sort((a, b) => a.order - b.order);
+  
+  let html = `<h6>${getContentTypeLabel(linkType)}</h6><div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>順序</th>
+          <th>タイトル</th>
+          <th>説明</th>
+          <th>URL</th>
+          <th>新しいタブ</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>`;
+  
+  courseLinks.forEach(link => {
+    html += `
+      <tr>
+        <td>${link.order}</td>
+        <td>${link.title}</td>
+        <td>${link.description || '-'}</td>
+        <td><a href="${link.url}" target="_blank" class="btn btn-sm btn-outline-primary">開く</a></td>
+        <td>${link.newTab ? '✓' : '-'}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" onclick="editLink('${link.id}')">編集</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteLink('${link.id}')">削除</button>
+        </td>
+      </tr>`;
+  });
+  
+  html += '</tbody></table></div>';
+  linkDiv.innerHTML = html;
+}
+
+// ヘルパー関数
+function getContentTypeLabel(type) {
+  const labels = {
+    'common': '共通資料',
+    'class1': '1組専用',
+    'class2': '2組専用'
+  };
+  return labels[type] || type;
+}
+
+function getCategoryLabel(category) {
+  const labels = {
+    'lecture': '講義資料',
+    'exercise': '演習',
+    'exam': '試験',
+    'reference': '参考資料'
+  };
+  return labels[category] || category;
+}
+
+// 編集・削除機能
+function editContent(contentId) {
+  const allContent = JSON.parse(localStorage.getItem(STORAGE_KEYS.content) || '[]');
+  const content = allContent.find(c => c.id === contentId);
+  
+  if (content) {
+    document.getElementById('contentId').value = content.id;
+    document.getElementById('contentTitle').value = content.title;
+    document.getElementById('contentUrl').value = content.url;
+    document.getElementById('contentDescription').value = content.description || '';
+    document.getElementById('contentCategory').value = content.category;
+    document.getElementById('contentOrder').value = content.order;
+    
+    const modal = new bootstrap.Modal(document.getElementById('contentModal'));
+    modal.show();
+  }
+}
+
+function deleteContent(contentId) {
+  if (confirm('この資料を削除しますか？')) {
+    let allContent = JSON.parse(localStorage.getItem(STORAGE_KEYS.content) || '[]');
+    allContent = allContent.filter(c => c.id !== contentId);
+    localStorage.setItem(STORAGE_KEYS.content, JSON.stringify(allContent));
+    loadCourseContent();
+    alert('資料が削除されました。');
+  }
+}
+
+function editLink(linkId) {
+  const allLinks = JSON.parse(localStorage.getItem(STORAGE_KEYS.links) || '[]');
+  const link = allLinks.find(l => l.id === linkId);
+  
+  if (link) {
+    document.getElementById('linkId').value = link.id;
+    document.getElementById('linkTitle').value = link.title;
+    document.getElementById('linkUrl').value = link.url;
+    document.getElementById('linkDescription').value = link.description || '';
+    document.getElementById('linkNewTab').checked = link.newTab || false;
+    document.getElementById('linkOrder').value = link.order;
+    
+    const modal = new bootstrap.Modal(document.getElementById('linkModal'));
+    modal.show();
+  }
+}
+
+function deleteLink(linkId) {
+  if (confirm('このリンクを削除しますか？')) {
+    let allLinks = JSON.parse(localStorage.getItem(STORAGE_KEYS.links) || '[]');
+    allLinks = allLinks.filter(l => l.id !== linkId);
+    localStorage.setItem(STORAGE_KEYS.links, JSON.stringify(allLinks));
+    loadCourseLinks();
+    alert('リンクが削除されました。');
   }
 }
