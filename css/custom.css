@@ -252,6 +252,14 @@ h2::after {
   margin-bottom: 0;
 }
 
+.footer .container {
+  background: initial;
+  box-shadow: none;
+  border: none;
+  backdrop-filter: none;
+  padding: 0;
+}
+
 /* Section styles */
 section {
   margin-top: 3rem;
