@@ -285,9 +285,13 @@ section h2 {
   }
 
   .container {
-    margin: 1rem;
+    margin: 1rem auto;
     padding: 1.5rem;
     border-radius: var(--border-radius);
+  }
+
+  .mobile-view {
+    padding-top: 70px;
   }
 
   h1 {
