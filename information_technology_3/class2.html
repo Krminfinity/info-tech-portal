@@ -61,6 +61,8 @@
         <!--     <ul>
           <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
         </ul> -->
+        <h2 class="mt-4">配布資料</h2>
+        <div id="materialsPcIt3Cl2"></div>
       </div>
       <p id="errorPcIt3Cl2" class="d-none" style="color:red;">パスワードが間違っています。</p>
     </div>
@@ -116,6 +118,8 @@
           <!--     <ul>
             <li><a href="https://mega.nz/folder/4Zg1SaZR#0PxJ7DHZ6tbfPx3R7z2I8Q" target="_blank">Sit & Quest</a></li>
           </ul> -->
+          <h2 class="mt-4">配布資料</h2>
+          <div id="materialsMobileIt3Cl2"></div>
         </div>
         <p id="errorMobileIt3Cl2" class="d-none" style="color:red;">パスワードが間違っています。</p>
       </div>
@@ -133,6 +137,14 @@
       if (input === pw) {
         document.getElementById("contentPcIt3Cl2").style.display = "block";
         document.getElementById("errorPcIt3Cl2").classList.add("d-none");
+        if (window.ITPortal && window.ITPortal.renderMaterials) {
+          window.ITPortal.renderMaterials({
+            course: 'it3',
+            classId: 'class2',
+            pcSelector: '#materialsPcIt3Cl2',
+            mobileSelector: '#materialsMobileIt3Cl2'
+          });
+        }
       } else {
         document.getElementById("contentPcIt3Cl2").style.display = "none";
         document.getElementById("errorPcIt3Cl2").classList.remove("d-none");
@@ -144,12 +156,21 @@
       if (input === pw) {
         document.getElementById("contentMobileIt3Cl2").style.display = "block";
         document.getElementById("errorMobileIt3Cl2").classList.add("d-none");
+        if (window.ITPortal && window.ITPortal.renderMaterials) {
+          window.ITPortal.renderMaterials({
+            course: 'it3',
+            classId: 'class2',
+            pcSelector: '#materialsPcIt3Cl2',
+            mobileSelector: '#materialsMobileIt3Cl2'
+          });
+        }
       } else {
         document.getElementById("contentMobileIt3Cl2").style.display = "none";
         document.getElementById("errorMobileIt3Cl2").classList.remove("d-none");
       }
     }
   </script>
+  <script src="/info-tech-portal/js/materials.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
